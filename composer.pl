@@ -93,11 +93,13 @@ a_b_c(A,B,[A,B]).
 
 
 % lanciatore
-suona(ScalaDi) :-
+componi(ScalaDi) :-
     random(1,3,Res), % scelgo una battuta ritmica a caso
     battuta(Res, Durate), % costruisco la lista delle durate 
     length(Durate,NDurate),
     costruisci_scala_blues(ScalaDi, Scala), % costruisco la scala indicata
     genera(NDurate,Scala,Y), % genero N note della scala
     maplist(a_b_c, Y, Durate, Pentagramma), % mappo la durata con le note
-    write(Pentagramma).
+    tell('spartito.txt'),
+    write(Pentagramma),
+    told.
