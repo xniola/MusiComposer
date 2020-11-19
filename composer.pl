@@ -21,16 +21,17 @@ estensione_armonica_chitarra([e2,f2,fd2,g2,gd2,a2,ad2,b2,
 
 % cellule ritmiche principali
 % nome della cellula ritmica e durata in ms
-cellula_ritmica(intero, 4000).
-cellula_ritmica(minima, 2000).
-cellula_ritmica(semiminima, 1000).
-cellula_ritmica(cromapunto, 750).
-cellula_ritmica(croma, 500).
-cellula_ritmica(semicroma, 250).
-cellula_ritmica(pausacroma, 500).
-cellula_ritmica(pausasemicroma, 250).
-cellula_ritmica(pausasemiminima, 1000).
-cellula_ritmica(pausaminima, 2000).
+cellula_ritmica(intero, 3600).
+cellula_ritmica(minima, 1800).
+cellula_ritmica(semiminima, 900).
+cellula_ritmica(cromapunto, 675).
+cellula_ritmica(croma, 450).
+cellula_ritmica(croma_terzina, 300). % da usare in terzina
+cellula_ritmica(semicroma, 225).
+cellula_ritmica(pausacroma, 450).
+cellula_ritmica(pausasemicroma, 225).
+cellula_ritmica(pausasemiminima, 900).
+cellula_ritmica(pausaminima, 1800).
 
 % Fornisce indice di "Elem" nella lista
 % indiceDi(+Lista,+Elem,-Indice)
@@ -66,7 +67,9 @@ costruisci_scala_blues(Tonica, Scala) :-
 % creo varie battute ritmiche in 4/4 (4000 ms).
 % battuta(+numero, -Durate)
 battuta(1, Durate) :- append([croma,croma,cromapunto,semicroma,minima],[],Durate).
-battuta(2, Durate) :- append([semicroma,semicroma,croma,semiminima,cromapunto,semicroma],[],Durate).
+battuta(2, Durate) :- append([semicroma,semicroma,croma,semiminima,cromapunto,semicroma,semiminima],[],Durate).
+battuta(3, Durate) :- append([croma, croma, croma_terzina,croma_terzina,croma_terzina, semiminima, croma,croma],[],Durate).
+battuta(4, Durate) :- append([croma, croma, croma, croma, semiminima, pausasemiminima],[],Durate).
 
 % viene utilizzato nel predicato ricorsivo "genera" per estrarre una nota da una scala musicale("Lista").
 % sceglie un elemento random "Elem" da una "Lista" 
@@ -91,15 +94,29 @@ genera(C,Lista, Y) :-
 % serve a maplist per mappare la lista delle note con la lista dei tempi
 a_b_c(A,B,[A,B]).
 
-
-% lanciatore
-componi(ScalaDi) :-
-    random(1,3,Res), % scelgo una battuta ritmica a caso
+% compone una battuta intera (sia note che tempo) e la restituisce su "Pentagramma"
+% componi_battuta(+ScalaDi, -Pentagramma)
+componi_battuta(ScalaDi, Pentagramma) :-
+    random(1,5,Res), % scelgo una battuta ritmica a caso
     battuta(Res, Durate), % costruisco la lista delle durate 
     length(Durate,NDurate),
     costruisci_scala_blues(ScalaDi, Scala), % costruisco la scala indicata
     genera(NDurate,Scala,Y), % genero N note della scala
-    maplist(a_b_c, Y, Durate, Pentagramma), % mappo la durata con le note
-    tell('spartito.txt'),
-    write(Pentagramma),
+    maplist(a_b_c, Y, Durate, Pentagramma). % mappo la durata con le note
+
+% scrive sul path "Percorso" il seguente "Testo"
+% scrivi_su(+Percorso, +Testo)
+scrivi_su(Percorso, Testo) :-
+    append(Percorso),
+    write(Testo), nl,
     told.
+
+% lanciatore
+% compone una canzone con una specifica "Tonalita" di "N" battute musicali 
+% componi(+Tonalita, +N)
+componi(_,0).
+componi(Tonalita, N) :-
+    N1 is N-1,
+    componi_battuta(Tonalita, Pentagramma),
+    scrivi_su('spartito.txt',Pentagramma),
+    componi(Tonalita, N1).
