@@ -1,7 +1,9 @@
+['./writer.pl'].
+
 % estensione armonica della chitarra acustica
-% nome della nota, frequenza in Hz
-nota(c3, 130.81).  nota(c4, 261.63).  nota(c5, 523.25).  nota(c6, 1046.50).
-nota(cd3, 138.59). nota(cd4, 277.18). nota(cd5, 554.37).
+% nome della nota, ['NomeNota',Tonalita, Alterazione]
+nota(c3,['C',3]).  nota(c4, ['C',4]).  nota(c5, ['C',5]).  nota(c6, ['C',5]).
+nota(cd3, ['C',3,1]). nota(cd4, ['C',4,1]). nota(cd5, ['C',5,1]).
 nota(d3, 146.83).  nota(d4, 293.66).  nota(d5, 587.33).
 nota(dd3, 155.56). nota(dd4, 311.13). nota(dd5, 622.25).
 nota(e2, 82.41).   nota(e3, 164.81).  nota(e4, 329.63).  nota(e5, 659.25).
