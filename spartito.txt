@@ -1,0 +1,2 @@
+[[[A,4],eighth],[[D,5,1],eighth],[[D,5],eighth],[[C,5],eighth],[[A,5],quarter],[[A,4],quarter]]
+[[[A,4],eighth],[[C,5],eighth],[[D,4,1],croma_terzina],[[G,4],croma_terzina],[[A,3],croma_terzina],[[D,4],quarter],[[C,5],eighth],[[C,5],eighth]]

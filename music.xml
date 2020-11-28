@@ -11,7 +11,7 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>2</divisions>
+        <divisions>4</divisions>
         <key>
           <fifths>0</fifths>
         </key>
@@ -25,36 +25,44 @@
         </clef>
       </attributes>  
 
+      <!-- 2^n casi da consideraer -->
+      <!--Primo caso -->
     <note>
       <pitch>
-        <step>e</step>
+        <step>E</step>
         <octave>4</octave>
       </pitch>
-      <type>whole</type>
+      <duration>1.5</duration>
     </note>
 
+        <!--Secondo caso -->
   <note>
     <pitch>
-      <step>g</step>
+      <step>G</step>
       <octave>4</octave>
     </pitch>
     <type>quarter</type>
   </note>
 
+      <!--Terzo caso -->
    <note>
     <pitch>
-      <step>b</step>
+      <step>B</step>
+      <alter>-1</alter>
       <octave>4</octave>
     </pitch>
-    <type>eighth</type>
+    <type>16th</type>
+    <dot/>
   </note>
 
+      <!--Quarto caso -->
    <note>
     <pitch>
-      <step>g</step>
+      <step>G</step>
+      <alter>1</alter>
       <octave>4</octave>
     </pitch>
-    <type>whole</type>
+    <type>quarter</type>
   </note>
 
     </measure>

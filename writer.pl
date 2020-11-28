@@ -1,3 +1,26 @@
+/*
+4 casi:
+
+1) ['E',4, croma]
+2) ['E',4,1, croma]
+3) ['E',4,cromapunto]
+4) ['E',4,1, cromapunto]
+
+*/
+
+
+scrivi_nota(Lista):-
+
+
+
+
+
+
+
+
+
+
+
 % note non alterate
 scrivi_nota(Lista) :-
 length(Lista, Len),
