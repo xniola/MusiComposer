@@ -32,7 +32,11 @@
         <step>E</step>
         <octave>4</octave>
       </pitch>
-      <duration>1.5</duration>
+      <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
     </note>
 
         <!--Secondo caso -->

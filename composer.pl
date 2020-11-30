@@ -24,18 +24,22 @@ estensione_armonica_chitarra([e2,f2,fd2,g2,gd2,a2,ad2,b2,
 % cellule ritmiche principali
 % nome della cellula ritmica e durata in battiti da 4 divisioni
 % [intero, minima, semiminima, cromapunto,croma...] --> [whole, half, quarter, eighthdotted,eighth...]
+
 cellula_ritmica(whole, 16).
 cellula_ritmica(half, 8).
 cellula_ritmica(quarter, 4).
 cellula_ritmica(eighthdotted, 3).
 cellula_ritmica(eighth, 2).
-cellula_ritmica(croma_terzina, 1.3333333). % da usare in terzina
-cellula_ritmica(semicroma, 1).
-
+cellula_ritmica(croma_terzina, 1.3333333).
+cellula_ritmica(croma_terzina_iniziale, 1.3333333). % da usare in terzina
+cellula_ritmica(croma_terzina_finale, 1.3333333).
+cellula_ritmica('16th', 1).
 cellula_ritmica(pausacroma, 2).
 cellula_ritmica(pausasemicroma, 1).
 cellula_ritmica(pausasemiminima, 4).
 cellula_ritmica(pausaminima, 8).
+
+
 
 % Fornisce indice di "Elem" nella lista
 % indiceDi(+Lista,+Elem,-Indice)
@@ -65,18 +69,40 @@ costruisci_scala_blues(Tonica, Scala) :-
   Indice12 is Indice + 24,nth0(Indice12, X, Nota12), nota(Nota12, InfoNota12),
   Indice13 is Indice +27, nth0(Indice13, X, Nota13), nota(Nota13, InfoNota13),
   nota(Tonica,InfoTonica),
-  !,
+   !,
   Scala = [InfoTonica,InfoNota1, InfoNota2, InfoNota3, InfoNota4,
            InfoNota5, InfoNota6, InfoNota7, InfoNota8, InfoNota9,
            InfoNota10, InfoNota11, InfoNota12, InfoNota13].
   
+% varie battute ritmiche in 4/4.
+battuta(1,[eighth,eighth,eighthdotted,'16th',half]).
+battuta(2,['16th','16th',eighth,quarter,eighthdotted,quarter]).
+battuta(3,[eighth, eighth, croma_terzina_iniziale,croma_terzina,croma_terzina_finale, quarter, eighth,eighth]).
+battuta(4,[eighth, eighth, eighth, eighth, quarter, quarter]).
 
-% creo varie battute ritmiche in 4/4 (4000 ms).
-% battuta(+numero, -Durate)
-battuta(1, Durate) :- append([eighth,eighth,eighthdotted,semicroma,half],[],Durate).
-battuta(2, Durate) :- append([semicroma,semicroma,eighth,quarter,eighthdotted,quarter],[],Durate).
-battuta(3, Durate) :- append([eighth, eighth, croma_terzina,croma_terzina,croma_terzina, quarter, eighth,eighth],[],Durate).
-battuta(4, Durate) :- append([eighth, eighth, eighth, eighth, quarter, quarter],[],Durate).
+
+
+% vari lick da 4/4 (note+tempo)
+% lick(+Numero, +Tonica, -Lick)
+lick(1, Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  nota(Tonica, InfoTonica),
+  Indice1 is Indice-2, nth0(Indice1, X, Nota1), nota(Nota1, InfoNota1),
+  Indice2 is Indice-5, nth0(Indice2, X, Nota2), nota(Nota2, InfoNota2),
+  Indice3 is Indice-6, nth0(Indice3, X, Nota3), nota(Nota3, InfoNota3),
+  Indice4 is Indice-7, nth0(Indice4, X, Nota4), nota(Nota4, InfoNota4),
+  Indice5 is Indice-9, nth0(Indice5, X, Nota5), nota(Nota5, InfoNota5),
+  Indice6 is Indice-12, nth0(Indice6, X, Nota6), nota(Nota6, InfoNota6),
+  Lick = [
+    [InfoTonica , croma_terzina_iniziale],
+    [InfoNota1, croma_terzina],
+    [InfoNota2, croma_terzina_finale],
+    [InfoNota3, croma_terzina_iniziale],
+    [InfoNota4, croma_terzina],
+    [InfoNota5, croma_terzina_finale],
+    [InfoNota6, half]].
+
 
 % viene utilizzato nel predicato ricorsivo "genera" per estrarre una nota da una scala musicale("Lista").
 % sceglie un elemento random "Elem" da una "Lista" 
@@ -127,69 +153,3 @@ componi(Tonalita, N) :-
     componi_battuta(Tonalita, Pentagramma),
     scrivi_su('spartito.txt',Pentagramma),
     componi(Tonalita, N1).
-
-
-scrivi_xml(Tonalita,N) :-
-   scrivi_su('spartito.xml','<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE score-partwise PUBLIC
-    "-//Recordare//DTD MusicXML 3.1 Partwise//EN"
-    "http://www.musicxml.org/dtds/partwise.dtd">
-<score-partwise version="3.1">
-  <part-list>
-    <score-part id="P1">
-      <part-name>MusiComposer</part-name>
-    </score-part>
-  </part-list>
-  <part id="P1">
-    <measure number="1">
-      <attributes>
-        <divisions>2</divisions>
-        <key>
-          <fifths>0</fifths>
-        </key>
-        <time>
-          <beats>4</beats>,,
-          <beat-type>4</beat-type>
-        </time>
-        <clef>
-          <sign>G</sign>
-          <line>2</line>
-        </clef>
-      </attributes>  
-'),
-battuta_xml(Tonalita,N).
-
-battuta_xml(_,0) :-
-  scrivi_su('spartito.xml','</measure>
-  </part>
-</score-partwise>').
-
-battuta_xml(Tonalita, N) :- 
-  N1 is N-1,
-  componi_battuta(Tonalita,Battuta),
-  scrivi_battuta(Battuta),
-  battuta_xml(Tonalita,N1).
-
-scrivi_battuta([]).
-scrivi_battuta(Battuta) :-
-  Battuta = [T|C],
-  nth0(0, Battuta, Elemento),
-  nth0(0,Elemento,InfoNota),
-  nth0(0,InfoNota,Nota),
-  nth0(1,InfoNota,Numero),
-  nth0(1, Elemento, Ritmo),
-  concat('<note>
-    <pitch>
-      <step>', Nota, S1),
-    concat('</step>
-      <octave>',Numero,S2),
-    concat(S1,S2,S3),
-    concat('</octave>
-    </pitch>
-    <type>',Ritmo, S4),
-    concat(S3,S4,S5),
-    concat(S5,'</type>
-  </note>', S6),
-  scrivi_su('spartito.xml',S6),
-  scrivi_battuta(C).
-  

@@ -1,2 +1,3 @@
-[[[A,4],eighth],[[D,5,1],eighth],[[D,5],eighth],[[C,5],eighth],[[A,5],quarter],[[A,4],quarter]]
-[[[A,4],eighth],[[C,5],eighth],[[D,4,1],croma_terzina],[[G,4],croma_terzina],[[A,3],croma_terzina],[[D,4],quarter],[[C,5],eighth],[[C,5],eighth]]
+[[[C,5],eighth],[[C,5],eighth],[[A,5],croma_terzina],[[C,5],croma_terzina],[[D,5],croma_terzina],[[E,5],quarter],[[A,5],eighth],[[C,5],eighth]]
+[[[A,3],eighth],[[C,5],eighth],[[D,5,1],eighthdotted],[[D,5],semicroma],[[E,5],half]]
+[[[D,5],eighth],[[A,4],eighth],[[A,3],eighth],[[A,3],eighth],[[A,4],quarter],[[E,4],quarter]]
