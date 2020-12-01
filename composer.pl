@@ -34,10 +34,11 @@ cellula_ritmica(croma_terzina, 1.3333333).
 cellula_ritmica(croma_terzina_iniziale, 1.3333333). % da usare in terzina
 cellula_ritmica(croma_terzina_finale, 1.3333333).
 cellula_ritmica('16th', 1).
-cellula_ritmica(pausacroma, 2).
-cellula_ritmica(pausasemicroma, 1).
-cellula_ritmica(pausasemiminima, 4).
-cellula_ritmica(pausaminima, 8).
+cellula_ritmica(pausa_eighth, 2).
+cellula_ritmica(pausa_eighthdotted, 3).
+cellula_ritmica(pausa_16th, 1).
+cellula_ritmica(pausa_quarter, 4).
+cellula_ritmica(pausa_half, 8).
 
 
 

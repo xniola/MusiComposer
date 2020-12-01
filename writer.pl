@@ -39,18 +39,21 @@ battuta_xml(Tonalita, N) :-
   scrivi_battuta(Battuta),
   battuta_xml(Tonalita,N1).
 
+% nota non alterata, tempo naturale
 scrivi_battuta([]).
 scrivi_battuta(Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
-  nth0(0,Elemento,InfoNota),
-  nth0(0,InfoNota,Nota),
-  nth0(1,InfoNota,Numero),
   nth0(1, Elemento, Ritmo),
   not(Ritmo = croma_terzina_iniziale),
   not(Ritmo = croma_terzina_finale),
   not(Ritmo = croma_terzina),
   not(Ritmo = eighthdotted),
+  nth0(0,Elemento,InfoNota),
+  length(InfoNota,Len),
+  Len = 2,
+  nth0(0,InfoNota,Nota),
+  nth0(1,InfoNota,Numero),
   concat('<note>
     <pitch>
       <step>', Nota, S1),
@@ -66,15 +69,17 @@ scrivi_battuta(Battuta) :-
   scrivi_su('spartito.xml',S6),
   scrivi_battuta(C).
 
-
+% nota non alterata , tempo croma con punto
 scrivi_battuta(Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
-  nth0(0,Elemento,InfoNota),
-  nth0(0,InfoNota,Nota),
-  nth0(1,InfoNota,Numero),
   nth0(1, Elemento, Ritmo),
   Ritmo = eighthdotted,
+  nth0(0,Elemento,InfoNota),
+  length(InfoNota,Len),
+  Len = 2,
+  nth0(0,InfoNota,Nota),
+  nth0(1,InfoNota,Numero),
   concat('<note>
     <pitch>
       <step>', Nota, S1),
@@ -88,15 +93,18 @@ scrivi_battuta(Battuta) :-
     </note>', S4),
   scrivi_su('spartito.xml',S4),
   scrivi_battuta(C).
-  
+
+% nota non alterata, tempo terzina della croma iniziale
 scrivi_battuta(Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
-  nth0(0,Elemento,InfoNota),
-  nth0(0,InfoNota,Nota),
-  nth0(1,InfoNota,Numero),
   nth0(1, Elemento, Ritmo),
   Ritmo = croma_terzina_iniziale,
+  nth0(0,Elemento,InfoNota),
+  length(InfoNota,Len),
+  Len = 2,
+  nth0(0,InfoNota,Nota),
+  nth0(1,InfoNota,Numero),
   concat('<note>
     <pitch>
       <step>', Nota, S1),
@@ -117,14 +125,17 @@ scrivi_battuta(Battuta) :-
   scrivi_su('spartito.xml',S4),
   scrivi_battuta(C).
 
+% nota non alterata, tempo croma terzina
 scrivi_battuta(Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
-  nth0(0,Elemento,InfoNota),
-  nth0(0,InfoNota,Nota),
-  nth0(1,InfoNota,Numero),
   nth0(1, Elemento, Ritmo),
   Ritmo = croma_terzina,
+  nth0(0,Elemento,InfoNota),
+  length(InfoNota,Len),
+  Len = 2,
+  nth0(0,InfoNota,Nota),
+  nth0(1,InfoNota,Numero),
   concat('<note>
     <pitch>
       <step>', Nota, S1),
@@ -142,14 +153,17 @@ scrivi_battuta(Battuta) :-
   scrivi_su('spartito.xml',S4),
   scrivi_battuta(C).
 
+% nota non alterata, tempo croma terzina finale.
 scrivi_battuta(Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
-  nth0(0,Elemento,InfoNota),
-  nth0(0,InfoNota,Nota),
-  nth0(1,InfoNota,Numero),
   nth0(1, Elemento, Ritmo),
   Ritmo = croma_terzina_finale,
+  nth0(0,Elemento,InfoNota),
+  length(InfoNota,Len),
+  Len = 2,
+  nth0(0,InfoNota,Nota),
+  nth0(1,InfoNota,Numero),
   concat('<note>
     <pitch>
       <step>', Nota, S1),
@@ -169,3 +183,78 @@ scrivi_battuta(Battuta) :-
     </note>', S4),
   scrivi_su('spartito.xml',S4),
   scrivi_battuta(C).
+
+
+% nota alterata, tempo naturale
+scrivi_battuta(Battuta) :-
+  Battuta = [_|C],
+  nth0(0, Battuta, Elemento),
+  nth0(1, Elemento, Ritmo),
+  not(Ritmo = croma_terzina_iniziale),
+  not(Ritmo = croma_terzina_finale),
+  not(Ritmo = croma_terzina),
+  not(Ritmo = eighthdotted),
+  nth0(0,Elemento,InfoNota),
+  length(InfoNota,Len),
+  Len = 3,
+  nth0(0,InfoNota,Nota),
+  nth0(1,InfoNota,Numero),
+  nth0(2, InfoNota, Alterazione),
+  concat('<note>
+  <pitch>
+    <step>', Nota, S1),
+  concat('</step>
+    <alter>',Alterazione,S2),
+  concat('</alter>
+    <octave>',Numero,S3),
+  concat('</octave>
+  </pitch>
+  <type>',Ritmo, S4),
+  concat(S1,S2,P1),
+  concat(S3,S4,P2),
+  concat(P1,P2,P3),
+ concat(P3,'</type>
+</note>',P4),
+  scrivi_su('spartito.xml',P4),
+  scrivi_battuta(C).
+
+
+% nota alterata, tempo croma_terzina_iniziale
+
+
+
+% pause
+
+scrivi_battuta(Battuta) :-
+  Battuta = [_|C],
+  nth0(0, Battuta, Elemento),
+  nth0(1, Elemento, Ritmo),
+  Ritmo = pausa_eighth,
+  nth0(0,Elemento,InfoNota),
+  nth0(0,InfoNota,Nota),
+  nth0(1,InfoNota,Numero),
+  concat('<note>
+    <pitch>
+      <step>', Nota, S1),
+    concat('</step>
+      <octave>',Numero,S2),
+    concat(S1,S2,S3),
+    concat(S3,'</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" type="stop"/>
+        </notations>
+    </note>', S4),
+  scrivi_su('spartito.xml',S4),
+  scrivi_battuta(C).
+
+cellula_ritmica(pausa_eighth, 2).
+cellula_ritmica(pausa_eighthdotted, 3).
+cellula_ritmica(pausa_16th, 1).
+cellula_ritmica(pausa_quarter, 4).
+cellula_ritmica(pausa_half, 8).
