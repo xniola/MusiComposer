@@ -34,13 +34,20 @@ cellula_ritmica(croma_terzina, 1.3333333).
 cellula_ritmica(croma_terzina_iniziale, 1.3333333). % da usare in terzina
 cellula_ritmica(croma_terzina_finale, 1.3333333).
 cellula_ritmica('16th', 1).
-cellula_ritmica(pausa_eighth, 2).
-cellula_ritmica(pausa_eighthdotted, 3).
+
+% pause: [ [_,_,_], pausa ]
 cellula_ritmica(pausa_16th, 1).
-cellula_ritmica(pausa_quarter, 4).
-cellula_ritmica(pausa_half, 8).
-
-
+cellula_ritmica(pausa_eighth, 1).
+cellula_ritmica(pausa_quarter, 2).
+cellula_ritmica(pausa_half, 4).
+cellula_ritmica(pausa_whole, 8).
+cellula_ritmica(pausa_eighthdotted, 1,5).
+pausa(pausa_16th).
+pausa(pausa_eighth).
+pausa(pausa_quarter).
+pausa(pausa_half).
+pausa(pausa_whole).
+pausa(pausa_eighthdotted).
 
 % Fornisce indice di "Elem" nella lista
 % indiceDi(+Lista,+Elem,-Indice)
@@ -80,6 +87,7 @@ battuta(1,[eighth,eighth,eighthdotted,'16th',half]).
 battuta(2,['16th','16th',eighth,quarter,eighthdotted,quarter]).
 battuta(3,[eighth, eighth, croma_terzina_iniziale,croma_terzina,croma_terzina_finale, quarter, eighth,eighth]).
 battuta(4,[eighth, eighth, eighth, eighth, quarter, quarter]).
+battuta(5,[quarter,pausa_quarter,quarter,pausa_quarter]).
 
 
 
@@ -131,7 +139,7 @@ a_b_c(A,B,[A,B]).
 % compone una battuta intera (sia note che tempo) e la restituisce su "Pentagramma"
 % componi_battuta(+ScalaDi, -Pentagramma)
 componi_battuta(ScalaDi, Pentagramma) :-
-    random(1,5,Res), % scelgo una battuta ritmica a caso
+    random(1,6,Res), % scelgo una battuta ritmica a caso
     battuta(Res, Durate), % costruisco la lista delle durate 
     length(Durate,NDurate),
     costruisci_scala_blues(ScalaDi, Scala), % costruisco la scala indicata

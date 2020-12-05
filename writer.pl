@@ -45,6 +45,7 @@ scrivi_battuta(Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
+  not(pausa(Ritmo)),
   not(Ritmo = croma_terzina_iniziale),
   not(Ritmo = croma_terzina_finale),
   not(Ritmo = croma_terzina),
@@ -190,6 +191,7 @@ scrivi_battuta(Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
+  not(pausa(Ritmo)),
   not(Ritmo = croma_terzina_iniziale),
   not(Ritmo = croma_terzina_finale),
   not(Ritmo = croma_terzina),
@@ -335,4 +337,74 @@ scrivi_battuta(Battuta) :-
         </notations>
     </note>', S4),
   scrivi_su('spartito.xml',S4),
+  scrivi_battuta(C).
+
+
+% pause
+
+scrivi_battuta(Battuta) :-
+  Battuta = [_|C],
+  nth0(0, Battuta, Elemento),
+  nth0(1, Elemento, Ritmo),
+  Ritmo = pausa_16th,
+  scrivi_su('spartito.xml','<note>
+  <rest/>
+  <type>16th</type>
+</note>'),
+  scrivi_battuta(C).
+
+  scrivi_battuta(Battuta) :-
+  Battuta = [_|C],
+  nth0(0, Battuta, Elemento),
+  nth0(1, Elemento, Ritmo),
+  Ritmo = pausa_eighth,
+  scrivi_su('spartito.xml','<note>
+  <rest/>
+  <type>eighth</type>
+</note>'),
+  scrivi_battuta(C).
+
+  scrivi_battuta(Battuta) :-
+  Battuta = [_|C],
+  nth0(0, Battuta, Elemento),
+  nth0(1, Elemento, Ritmo),
+  Ritmo = pausa_quarter,
+  scrivi_su('spartito.xml','<note>
+  <rest/>
+  <type>quarter</type>
+</note>'),
+  scrivi_battuta(C).
+
+  scrivi_battuta(Battuta) :-
+  Battuta = [_|C],
+  nth0(0, Battuta, Elemento),
+  nth0(1, Elemento, Ritmo),
+  Ritmo = pausa_half,
+  scrivi_su('spartito.xml','<note>
+  <rest/>
+  <type>half</type>
+</note>'),
+  scrivi_battuta(C).
+
+  scrivi_battuta(Battuta) :-
+  Battuta = [_|C],
+  nth0(0, Battuta, Elemento),
+  nth0(1, Elemento, Ritmo),
+  Ritmo = pausa_whole,
+  scrivi_su('spartito.xml','<note>
+  <rest/>
+  <type>whole</type>
+</note>'),
+  scrivi_battuta(C).
+
+  scrivi_battuta(Battuta) :-
+  Battuta = [_|C],
+  nth0(0, Battuta, Elemento),
+  nth0(1, Elemento, Ritmo),
+  Ritmo = pausa_eighthdotted,
+  scrivi_su('spartito.xml','<note>
+  <rest/>
+  <type>eighth</type>
+  <dot/>
+</note>'),
   scrivi_battuta(C).
