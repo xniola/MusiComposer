@@ -90,29 +90,6 @@ battuta(4,[eighth, eighth, eighth, eighth, quarter, quarter]).
 battuta(5,[quarter,pausa_quarter,quarter,pausa_quarter]).
 
 
-
-% vari lick da 4/4 (note+tempo)
-% lick(+Numero, +Tonica, -Lick)
-lick(1, Tonica, Lick) :-
-  estensione_armonica_chitarra(X),
-  indiceDi(X,Tonica,Indice),
-  nota(Tonica, InfoTonica),
-  Indice1 is Indice-2, nth0(Indice1, X, Nota1), nota(Nota1, InfoNota1),
-  Indice2 is Indice-5, nth0(Indice2, X, Nota2), nota(Nota2, InfoNota2),
-  Indice3 is Indice-6, nth0(Indice3, X, Nota3), nota(Nota3, InfoNota3),
-  Indice4 is Indice-7, nth0(Indice4, X, Nota4), nota(Nota4, InfoNota4),
-  Indice5 is Indice-9, nth0(Indice5, X, Nota5), nota(Nota5, InfoNota5),
-  Indice6 is Indice-12, nth0(Indice6, X, Nota6), nota(Nota6, InfoNota6),
-  Lick = [
-    [InfoTonica , croma_terzina_iniziale],
-    [InfoNota1, croma_terzina],
-    [InfoNota2, croma_terzina_finale],
-    [InfoNota3, croma_terzina_iniziale],
-    [InfoNota4, croma_terzina],
-    [InfoNota5, croma_terzina_finale],
-    [InfoNota6, half]].
-
-
 % viene utilizzato nel predicato ricorsivo "genera" per estrarre una nota da una scala musicale("Lista").
 % sceglie un elemento random "Elem" da una "Lista" 
 % scegli_random(+Lista, -Elem)
