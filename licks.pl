@@ -45,8 +45,10 @@ costruisci_lick([T1|C1], [T2|C2], Lick) :-
     Lick = [[T1,T2] | NC],
     costruisci_lick(C1, C2, NC).
 
+
 % vari lick da 4/4 (note+tempo)
 % lick(+Numero, +Tonica, -Lick)
+
 lick(1, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
