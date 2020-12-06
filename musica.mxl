@@ -10,20 +10,20 @@
   </part-list>
   <part id="P1">
     <measure number="1">
-      <attributes>
-        <divisions>4</divisions>
-        <key>
-          <fifths>0</fifths>
-        </key>
-        <time>
-          <beats>4</beats>
-          <beat-type>4</beat-type>
-        </time>
-        <clef>
-          <sign>G</sign>
-          <line>2</line>
-        </clef>
-      </attributes>  
+    <attributes>
+    <divisions>4</divisions>
+    <key>
+      <fifths>0</fifths>
+    </key>
+    <time>
+      <beats>4</beats>
+      <beat-type>4</beat-type>
+    </time>
+    <clef>
+      <sign>G</sign>
+      <line>2</line>
+    </clef>
+  </attributes>  
 <note>
   <pitch>
     <step>D</step>
@@ -122,5 +122,5 @@
   <type>quarter</type>
 </note>
 </measure>
-  </part>
+</part>
 </score-partwise>
