@@ -23,25 +23,24 @@ estensione_armonica_chitarra([e2,f2,fd2,g2,gd2,a2,ad2,b2,
 
 % cellule ritmiche principali
 % nome della cellula ritmica e durata in battiti da 4 divisioni
-% [intero, minima, semiminima, cromapunto,croma...] --> [whole, half, quarter, eighthdotted,eighth...]
-
-cellula_ritmica(whole, 16).
-cellula_ritmica(half, 8).
-cellula_ritmica(quarter, 4).
-cellula_ritmica(eighthdotted, 3).
-cellula_ritmica(eighth, 2).
-cellula_ritmica(croma_terzina, 1.3333333).
-cellula_ritmica(croma_terzina_iniziale, 1.3333333). % da usare in terzina
-cellula_ritmica(croma_terzina_finale, 1.3333333).
-cellula_ritmica('16th', 1).
+% [intero, minima, semiminima,croma...] --> [whole, half, quarter,eighth...]
+cellula_ritmica(whole, 4).
+cellula_ritmica(half, 2).
+cellula_ritmica(quarter, 1).
+cellula_ritmica(eighthdotted, 0.75).
+cellula_ritmica(eighth, 0.5).
+cellula_ritmica(croma_terzina, 0.33).
+cellula_ritmica(croma_terzina_iniziale, 0.33). % da usare in terzina
+cellula_ritmica(croma_terzina_finale, 0.33).
+cellula_ritmica('16th', 0.25).
 
 % pause: [ [_,_,_], pausa ]
-cellula_ritmica(pausa_16th, 1).
-cellula_ritmica(pausa_eighth, 1).
-cellula_ritmica(pausa_quarter, 2).
-cellula_ritmica(pausa_half, 4).
-cellula_ritmica(pausa_whole, 8).
-cellula_ritmica(pausa_eighthdotted, 1,5).
+cellula_ritmica(pausa_16th, 0.25).
+cellula_ritmica(pausa_eighth, 0.5).
+cellula_ritmica(pausa_quarter, 1).
+cellula_ritmica(pausa_half, 2).
+cellula_ritmica(pausa_whole, 4).
+cellula_ritmica(pausa_eighthdotted, 0.75).
 pausa(pausa_16th).
 pausa(pausa_eighth).
 pausa(pausa_quarter).
@@ -57,30 +56,45 @@ indiceDi([_|C], Element, Indice):-
   !,
   Indice is Indice1+1.
 
+% costruisce la lista degli indici relativi alla Tonica
+% costruisci_indici_scalablues(+IndiceTonica, +ListaIndici; -Res)
+costruisci_indici_scalablues(_,[],_).
+costruisci_indici_scalablues(IndiceTonica, ListaIndici, Res) :-
+    IndiceTonica < 18,
+    Res = [IndiceTonica | NC],
+    costruisci_indici_scalablues(IndiceTonica, ListaIndici, NC, _).
+
+costruisci_indici_scalablues(_,[],_,_).
+costruisci_indici_scalablues(IndiceTonica, [T|C], Res, _) :-
+    NewIndice is IndiceTonica + T,
+    Res = [NewIndice|NC],
+    costruisci_indici_scalablues(IndiceTonica, C, NC, _).
+
+% costruisce le note a partire dagli indici costruiti prima
+% costruisci_note_scalablues(+ListaIndici, -Res)
+costruisci_note_scalablues([], _).
+costruisci_note_scalablues([T|C], Res) :-
+    estensione_armonica_chitarra(EstensioneArmonica),
+    nth0(T, EstensioneArmonica, Nota1),
+    Res = [Nota1|NC],
+    costruisci_note_scalablues(C, NC).
+
+% costruisce il lick a partire dalle note costruite prima
+% costruisci_note2_scalablues(+ListaNote, -Res)
+costruisci_note2_scalablues([],_).
+costruisci_note2_scalablues([T|C], Res) :-
+    nota(T, InfoNota),
+    Res = [InfoNota|NC],
+    costruisci_note2_scalablues(C, NC).
+
 % costruisce una "Scala" blues a partire dalla tonica fornita
 % costruisci_scala_blues(+Tonica, -Scala)  
 costruisci_scala_blues(Tonica, Scala) :-
   estensione_armonica_chitarra(X),
-  indiceDi(X,Tonica,Indice),
-  Indice < 18, % posso partire al massimo da a3
-  Indice1 is Indice + 3,  nth0(Indice1, X, Nota1), nota(Nota1, InfoNota1),
-  Indice2 is Indice + 5,  nth0(Indice2, X, Nota2), nota(Nota2, InfoNota2),
-  Indice3 is Indice + 6,  nth0(Indice3, X, Nota3), nota(Nota3, InfoNota3),
-  Indice4 is Indice + 7,  nth0(Indice4, X, Nota4), nota(Nota4, InfoNota4),
-  Indice5 is Indice + 10, nth0(Indice5, X, Nota5), nota(Nota5, InfoNota5),
-  Indice6 is Indice + 12, nth0(Indice6, X, Nota6), nota(Nota6, InfoNota6),
-  Indice7 is Indice + 15, nth0(Indice7, X, Nota7), nota(Nota7, InfoNota7),
-  Indice8 is Indice + 17, nth0(Indice8, X, Nota8), nota(Nota8, InfoNota8),
-  Indice9 is Indice + 18, nth0(Indice9, X, Nota9), nota(Nota9, InfoNota9),
-  Indice10 is Indice + 19,nth0(Indice10, X, Nota10), nota(Nota10, InfoNota10),
-  Indice11 is Indice + 22,nth0(Indice11, X, Nota11), nota(Nota11, InfoNota11),
-  Indice12 is Indice + 24,nth0(Indice12, X, Nota12), nota(Nota12, InfoNota12),
-  Indice13 is Indice +27, nth0(Indice13, X, Nota13), nota(Nota13, InfoNota13),
-  nota(Tonica,InfoTonica),
-   !,
-  Scala = [InfoTonica,InfoNota1, InfoNota2, InfoNota3, InfoNota4,
-           InfoNota5, InfoNota6, InfoNota7, InfoNota8, InfoNota9,
-           InfoNota10, InfoNota11, InfoNota12, InfoNota13].
+  indiceDi(X,Tonica,IndiceTonica),
+  costruisci_indici_scalablues(IndiceTonica, [3,5,6,7,10,12,15,17,18,19,22,24,27], Res),
+  costruisci_note_scalablues(Res, Res1),
+  costruisci_note2_scalablues(Res1,Scala).
   
 % varie battute ritmiche in 4/4.
 battuta(1,[eighth,eighth,eighthdotted,'16th',half]).
@@ -90,7 +104,7 @@ battuta(4,[eighth, eighth, eighth, eighth, quarter, quarter]).
 battuta(5,[quarter,pausa_quarter,quarter,pausa_quarter]).
 
 
-% viene utilizzato nel predicato ricorsivo "genera" per estrarre una nota da una scala musicale("Lista").
+% viene utilizzato nel predicato ricorsivo "genera" per estrarre una nota da una scala musicale "Lista".
 % sceglie un elemento random "Elem" da una "Lista" 
 % scegli_random(+Lista, -Elem)
 scegli_random([], []).
