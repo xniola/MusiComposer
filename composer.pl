@@ -137,11 +137,13 @@ componi_battuta(ScalaDi, Pentagramma) :-
     genera(NDurate,Scala,Y), % genero N note della scala
     maplist(a_b_c, Y, Durate, Pentagramma). % mappo la durata con le note
 
-% lanciatore
-% compone una canzone con una specifica "Tonalita" di "N" battute musicali 
-% componi(+Tonalita, +N)
-componi(_,0).
+% lanciatore 
+componi :-
+    write('Ciao! Scegli una tonalita: [c3],[d3],[e3],[f3],[g3],[a3]'),
+    read(Tonalita),
+    write('Ora scegli quante battute suonare: [1],[2],...,[10]'),
+    read(N),
+    scrivi_xml('spartito.xml',Tonalita, N).
+
 componi(Tonalita, N) :-
-    %componi_battuta(Tonalita, Pentagramma),
-    lick(1,Tonalita,Pentagramma),
-    scrivi_xml('spartito.xml',Pentagramma, N).
+  scrivi_xml('spartito.xml',Tonalita,N).

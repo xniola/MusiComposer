@@ -5,7 +5,7 @@ scrivi_su(Percorso, Testo) :-
     write(Testo), nl,
     told.
 
-scrivi_xml(Percorso,Battuta,N) :-
+scrivi_xml(Percorso,Tonalita,N) :-
    scrivi_su(Percorso,'<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
     "-//Recordare//DTD MusicXML 3.1 Partwise//EN"
@@ -33,19 +33,19 @@ scrivi_xml(Percorso,Battuta,N) :-
         </clef>
       </attributes>  
 '),
-battuta_xml(Percorso,Battuta,N).
+battuta_xml(Percorso,Tonalita,N).
 
 battuta_xml(Percorso,_,0) :-
   scrivi_su(Percorso,'</measure>
   </part>
 </score-partwise>').
 
-battuta_xml(Percorso,Battuta, N) :- 
+battuta_xml(Percorso,Tonalita, N) :- 
   N1 is N-1,
-  %componi_battuta(Tonalita,Battuta),
+  componi_battuta(Tonalita,Battuta),
   %lick(1,Tonalita,Battuta),
   scrivi_battuta(Percorso, Battuta),
-  battuta_xml(Percorso,Battuta,N1).
+  battuta_xml(Percorso,Tonalita,N1).
 
 % nota non alterata, tempo naturale
 scrivi_battuta(_,[]).
