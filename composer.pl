@@ -137,19 +137,11 @@ componi_battuta(ScalaDi, Pentagramma) :-
     genera(NDurate,Scala,Y), % genero N note della scala
     maplist(a_b_c, Y, Durate, Pentagramma). % mappo la durata con le note
 
-% scrive sul path "Percorso" il seguente "Testo"
-% scrivi_su(+Percorso, +Testo)
-scrivi_su(Percorso, Testo) :-
-    append(Percorso),
-    write(Testo), nl,
-    told.
-
 % lanciatore
 % compone una canzone con una specifica "Tonalita" di "N" battute musicali 
 % componi(+Tonalita, +N)
 componi(_,0).
 componi(Tonalita, N) :-
-    N1 is N-1,
-    componi_battuta(Tonalita, Pentagramma),
-    scrivi_su('spartito.txt',Pentagramma),
-    componi(Tonalita, N1).
+    %componi_battuta(Tonalita, Pentagramma),
+    lick(1,Tonalita,Pentagramma),
+    scrivi_xml('spartito.xml',Pentagramma, N).

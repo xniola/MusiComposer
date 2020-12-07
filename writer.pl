@@ -1,5 +1,12 @@
-scrivi_xml(Tonalita,N) :-
-   scrivi_su('spartito.xml','<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+% scrive sul path "Percorso" il seguente "Testo" in formato txt
+% scrivi_su(+Percorso, +Testo)
+scrivi_su(Percorso, Testo) :-
+    append(Percorso),
+    write(Testo), nl,
+    told.
+
+scrivi_xml(Percorso,Battuta,N) :-
+   scrivi_su(Percorso,'<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
     "-//Recordare//DTD MusicXML 3.1 Partwise//EN"
     "http://www.musicxml.org/dtds/partwise.dtd">
@@ -26,22 +33,23 @@ scrivi_xml(Tonalita,N) :-
         </clef>
       </attributes>  
 '),
-battuta_xml(Tonalita,N).
+battuta_xml(Percorso,Battuta,N).
 
-battuta_xml(_,0) :-
-  scrivi_su('spartito.xml','</measure>
+battuta_xml(Percorso,_,0) :-
+  scrivi_su(Percorso,'</measure>
   </part>
 </score-partwise>').
 
-battuta_xml(Tonalita, N) :- 
+battuta_xml(Percorso,Battuta, N) :- 
   N1 is N-1,
-  componi_battuta(Tonalita,Battuta),
-  scrivi_battuta(Battuta),
-  battuta_xml(Tonalita,N1).
+  %componi_battuta(Tonalita,Battuta),
+  %lick(1,Tonalita,Battuta),
+  scrivi_battuta(Percorso, Battuta),
+  battuta_xml(Percorso,Battuta,N1).
 
 % nota non alterata, tempo naturale
-scrivi_battuta([]).
-scrivi_battuta(Battuta) :-
+scrivi_battuta(_,[]).
+scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -67,11 +75,11 @@ scrivi_battuta(Battuta) :-
     concat(S3,S4,S5),
     concat(S5,'</type>
 </note>', S6),
-  scrivi_su('spartito.xml',S6),
-  scrivi_battuta(C).
+  scrivi_su(Percorso,S6),
+  scrivi_battuta(Percorso, C).
 
 % nota non alterata , tempo croma con punto
-scrivi_battuta(Battuta) :-
+scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -92,11 +100,11 @@ scrivi_battuta(Battuta) :-
     <type>eighth</type>
     <dot/>
     </note>', S4),
-  scrivi_su('spartito.xml',S4),
-  scrivi_battuta(C).
+  scrivi_su(Percorso,S4),
+  scrivi_battuta(Percorso, C).
 
 % nota non alterata, tempo terzina della croma iniziale
-scrivi_battuta(Battuta) :-
+scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -123,11 +131,11 @@ scrivi_battuta(Battuta) :-
           <tuplet number="1" placement="above" type="start"/>
         </notations>
     </note>', S4),
-  scrivi_su('spartito.xml',S4),
-  scrivi_battuta(C).
+  scrivi_su(Percorso,S4),
+  scrivi_battuta(Percorso, C).
 
 % nota non alterata, tempo croma terzina
-scrivi_battuta(Battuta) :-
+scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -151,11 +159,11 @@ scrivi_battuta(Battuta) :-
           <normal-notes>2</normal-notes>
         </time-modification>
     </note>', S4),
-  scrivi_su('spartito.xml',S4),
-  scrivi_battuta(C).
+  scrivi_su(Percorso,S4),
+  scrivi_battuta(Percorso, C).
 
 % nota non alterata, tempo croma terzina finale.
-scrivi_battuta(Battuta) :-
+scrivi_battuta(Percorso,Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -182,12 +190,12 @@ scrivi_battuta(Battuta) :-
           <tuplet number="1" type="stop"/>
         </notations>
     </note>', S4),
-  scrivi_su('spartito.xml',S4),
-  scrivi_battuta(C).
+  scrivi_su(Percorso,S4),
+  scrivi_battuta(Percorso, C).
 
 
 % nota alterata, tempo naturale
-scrivi_battuta(Battuta) :-
+scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -214,12 +222,12 @@ scrivi_battuta(Battuta) :-
   concat(P1,S4,P2),
  concat(P2,'</type>
 </note>',P3),
-  scrivi_su('spartito.xml',P3),
-  scrivi_battuta(C).
+  scrivi_su(Percorso,P3),
+  scrivi_battuta(Percorso, C).
 
 
 % nota alterata, tempo croma_terzina_iniziale
-scrivi_battuta(Battuta) :-
+scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -247,12 +255,12 @@ scrivi_battuta(Battuta) :-
           <tuplet number="1" placement="above" type="start"/>
         </notations>
     </note>', S4),
-  scrivi_su('spartito.xml',S4),
-  scrivi_battuta(C).
+  scrivi_su(Percorso, S4),
+  scrivi_battuta(Percorso, C).
 
 
 % nota alterata , tempo croma con punto
-scrivi_battuta(Battuta) :-
+scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -274,12 +282,12 @@ scrivi_battuta(Battuta) :-
     <type>eighth</type>
     <dot/>
     </note>', S4),
-  scrivi_su('spartito.xml',S4),
-  scrivi_battuta(C).
+  scrivi_su(Percorso,S4),
+  scrivi_battuta(Percorso, C).
 
 
 % nota alterata, tempo croma terzina
-scrivi_battuta(Battuta) :-
+scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -304,11 +312,11 @@ scrivi_battuta(Battuta) :-
           <normal-notes>2</normal-notes>
         </time-modification>
     </note>', S4),
-  scrivi_su('spartito.xml',S4),
-  scrivi_battuta(C).
+  scrivi_su(Percorso,S4),
+  scrivi_battuta(Percorso, C).
 
 % nota alterata, tempo croma terzina finale.
-scrivi_battuta(Battuta) :-
+scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -336,13 +344,13 @@ scrivi_battuta(Battuta) :-
           <tuplet number="1" type="stop"/>
         </notations>
     </note>', S4),
-  scrivi_su('spartito.xml',S4),
-  scrivi_battuta(C).
+  scrivi_su(Percorso, S4),
+  scrivi_battuta(Percorso, C).
 
 
 % pause
 
-scrivi_battuta(Battuta) :-
+scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
@@ -351,60 +359,60 @@ scrivi_battuta(Battuta) :-
   <rest/>
   <type>16th</type>
 </note>'),
-  scrivi_battuta(C).
+  scrivi_battuta(Percorso, C).
 
-  scrivi_battuta(Battuta) :-
+  scrivi_battuta(Percorso,Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
   Ritmo = pausa_eighth,
-  scrivi_su('spartito.xml','<note>
+  scrivi_su(Percorso,'<note>
   <rest/>
   <type>eighth</type>
 </note>'),
-  scrivi_battuta(C).
+  scrivi_battuta(Percorso, C).
 
-  scrivi_battuta(Battuta) :-
+  scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
   Ritmo = pausa_quarter,
-  scrivi_su('spartito.xml','<note>
+  scrivi_su(Percorso,'<note>
   <rest/>
   <type>quarter</type>
 </note>'),
-  scrivi_battuta(C).
+  scrivi_battuta(Percorso, C).
 
-  scrivi_battuta(Battuta) :-
+  scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
   Ritmo = pausa_half,
-  scrivi_su('spartito.xml','<note>
+  scrivi_su(Percorso,'<note>
   <rest/>
   <type>half</type>
 </note>'),
-  scrivi_battuta(C).
+  scrivi_battuta(Percorso, C).
 
-  scrivi_battuta(Battuta) :-
+  scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
   Ritmo = pausa_whole,
-  scrivi_su('spartito.xml','<note>
+  scrivi_su(Percorso,'<note>
   <rest/>
   <type>whole</type>
 </note>'),
-  scrivi_battuta(C).
+  scrivi_battuta(Percorso, C).
 
-  scrivi_battuta(Battuta) :-
+  scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
   nth0(1, Elemento, Ritmo),
   Ritmo = pausa_eighthdotted,
-  scrivi_su('spartito.xml','<note>
+  scrivi_su(Percorso,'<note>
   <rest/>
   <type>eighth</type>
   <dot/>
 </note>'),
-  scrivi_battuta(C).
+  scrivi_battuta(Percorso, C).
