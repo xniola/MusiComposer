@@ -51,7 +51,8 @@ lick(1, Tonica, Lick) :-
     [croma_terzina_iniziale,croma_terzina,
     croma_terzina_finale,croma_terzina_iniziale,
     croma_terzina,croma_terzina_finale,half],
-    Lick).
+    Lick),
+  !.
 
 lick(2, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
@@ -59,14 +60,16 @@ lick(2, Tonica, Lick) :-
   costruisci_lick(Indice,[3,4,7,12,10,7,5,7,3,4,0],
     ['16th','16th','16th','16th','16th','16th','16th','16th',
     '16th','16th',quarter,pausa_eighth],
-    Lick).
+    Lick),
+  !.
 
 lick(3, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,[7,7,12,12],
     [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,half,pausa_quarter],
-    Lick).
+    Lick),
+  !.
 
 lick(4, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
@@ -74,14 +77,16 @@ lick(4, Tonica, Lick) :-
   costruisci_lick(Indice,[12,10,7,6,5,3,0],
     [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
     croma_terzina_iniziale,croma_terzina,croma_terzina_finale,half],
-    Lick).
+    Lick),
+  !.
 
 lick(5, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,[-12,-10,-9,-8,-5,-3,-5,0],
     [quarter,eighth,eighth,eighth,eighth,eighth,eighth,whole],
-    Lick).
+    Lick),
+  !.
 
 lick(6, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
@@ -90,21 +95,24 @@ lick(6, Tonica, Lick) :-
     [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
     eighth,eighth,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
     eighth,eighth,whole],
-    Lick).
+    Lick),
+  !.
 
 lick(7, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,[7,6,5,0,3,4,0],
     [quarter,quarter,eighth,eighth,eighth,eighth,whole],
-    Lick).
+    Lick),
+  !.
 
 lick(8, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,[7,0,7,0,4,7,0,4],
     [eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth],
-    Lick).
+    Lick),
+  !.
 
 lick(9, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
@@ -112,7 +120,8 @@ lick(9, Tonica, Lick) :-
   costruisci_lick(Indice,[0,4,0,2,5,0,3,6,0,4,7],
     [eighth,eighth,eighth,eighth,eighth,eighth,
     eighth,eighth,eighth,eighth,half,pausa_quarter],
-    Lick).
+    Lick),
+  !.
 
 lick(10, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
@@ -121,23 +130,116 @@ lick(10, Tonica, Lick) :-
     [pausa_eighth,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
     eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,
     pausa_quarter],
-    Lick).
+    Lick),
+  !.
 
 lick(11, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
-  costruisci_lick(Indice,[12,9,5,2,11,2,5,8,7,5,2,3,-5],
+  costruisci_lick(Indice,[0,12,9,5,2,11,2,5,8,7,5,2,3,4,-5,0],
     [pausa_eighth,eighth,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
     eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,
     pausa_quarter],
-    Lick).
+    Lick),
+  !.
 
 lick(12, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
-  costruisci_lick(Indice,[-10,-8,-7,-3,0,4,2,0,-1,2,5,7,8,10,8,7,5,4,0,-5,-7-8,0],
+  costruisci_lick(Indice,[-10,-8,-7,-3,0,4,2,0,-1,2,5,7,8,10,8,7,5,4,0,-5,-7-8,0,0],
     [eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,
     eighth,eighth,eighth,'16th','16th',eighth,eighth,quarter,
     croma_terzina_iniziale,croma_terzina,croma_terzina_finale,eighth,eighth,
     pausa_quarter],
-    Lick).
+    Lick),
+  !.
+
+lick(13, Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[-10,-9,-7,-5,-4,-2,-1,3,2,0,-5,-9,-10,-12,0],
+    [eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,quarter,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,eighth,eighth,
+    pausa_quarter],
+    Lick),
+  !.
+
+lick(14, Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[3,0,-2,0,-2,-5,-2,-5,-7,-5,-7,-9,-12],
+    [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    whole],
+    Lick),
+  !.
+
+lick(15, Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[-12,-9,-7,-5,-2,0,3,5,7,10,12,15,7],
+    ['16th','16th','16th','16th',
+    '16th','16th','16th','16th',
+    '16th','16th','16th','16th',quarter],
+    Lick),
+  !.
+
+lick(16, Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[3,0,-5,3,0,-5,3,0,-5,3,0,-5],
+    [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale],
+    Lick),
+  !.
+
+lick(17, Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[0,0,9,7,6,5,3,2,0],
+    [pausa_eighth,eighth,quarter,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale],
+    Lick),
+  !.
+
+lick(18, Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[6,7,12,10,7,6,5,3,0,0],
+    [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,quarter],
+    Lick),
+  !.
+
+lick(19, Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[15,12,7,3,0,-5,-5],
+    [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    quarter,pausa_quarter],
+    Lick),
+  !.
+
+lick(20, Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[12,10,7,5,7,5,3,0],
+    [quarter, croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    quarter],
+    Lick),
+  !.
+
+% test di prova compatibilita licks
+suonaIn(_,21).
+suonaIn(Tonica,N) :-
+  lick(N,Tonica,_),
+  N1 is N+1,
+  suonaIn(Tonica, N1).

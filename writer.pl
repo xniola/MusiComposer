@@ -42,8 +42,9 @@ battuta_xml(Percorso,_,0) :-
 
 battuta_xml(Percorso,Tonalita, N) :- 
   N1 is N-1,
-  componi_battuta(Tonalita,Battuta),
-  %lick(1,Tonalita,Battuta),
+  % componi_battuta(Tonalita,Battuta),
+  % lick(1,Tonalita,Battuta),
+  lick(N,Tonalita,Battuta),
   scrivi_battuta(Percorso, Battuta),
   battuta_xml(Percorso,Tonalita,N1).
 
@@ -76,7 +77,8 @@ scrivi_battuta(Percorso, Battuta) :-
     concat(S5,'</type>
 </note>', S6),
   scrivi_su(Percorso,S6),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
 % nota non alterata , tempo croma con punto
 scrivi_battuta(Percorso, Battuta) :-
@@ -101,7 +103,8 @@ scrivi_battuta(Percorso, Battuta) :-
     <dot/>
     </note>', S4),
   scrivi_su(Percorso,S4),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
 % nota non alterata, tempo terzina della croma iniziale
 scrivi_battuta(Percorso, Battuta) :-
@@ -132,7 +135,8 @@ scrivi_battuta(Percorso, Battuta) :-
         </notations>
     </note>', S4),
   scrivi_su(Percorso,S4),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
 % nota non alterata, tempo croma terzina
 scrivi_battuta(Percorso, Battuta) :-
@@ -160,7 +164,8 @@ scrivi_battuta(Percorso, Battuta) :-
         </time-modification>
     </note>', S4),
   scrivi_su(Percorso,S4),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
 % nota non alterata, tempo croma terzina finale.
 scrivi_battuta(Percorso,Battuta) :-
@@ -191,7 +196,8 @@ scrivi_battuta(Percorso,Battuta) :-
         </notations>
     </note>', S4),
   scrivi_su(Percorso,S4),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
 
 % nota alterata, tempo naturale
@@ -223,7 +229,8 @@ scrivi_battuta(Percorso, Battuta) :-
  concat(P2,'</type>
 </note>',P3),
   scrivi_su(Percorso,P3),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
 
 % nota alterata, tempo croma_terzina_iniziale
@@ -256,7 +263,8 @@ scrivi_battuta(Percorso, Battuta) :-
         </notations>
     </note>', S4),
   scrivi_su(Percorso, S4),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
 
 % nota alterata , tempo croma con punto
@@ -283,7 +291,8 @@ scrivi_battuta(Percorso, Battuta) :-
     <dot/>
     </note>', S4),
   scrivi_su(Percorso,S4),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
 
 % nota alterata, tempo croma terzina
@@ -313,7 +322,8 @@ scrivi_battuta(Percorso, Battuta) :-
         </time-modification>
     </note>', S4),
   scrivi_su(Percorso,S4),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
 % nota alterata, tempo croma terzina finale.
 scrivi_battuta(Percorso, Battuta) :-
@@ -345,7 +355,8 @@ scrivi_battuta(Percorso, Battuta) :-
         </notations>
     </note>', S4),
   scrivi_su(Percorso, S4),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
 
 % pause
@@ -359,7 +370,8 @@ scrivi_battuta(Percorso, Battuta) :-
   <rest/>
   <type>16th</type>
 </note>'),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
   scrivi_battuta(Percorso,Battuta) :-
   Battuta = [_|C],
@@ -370,7 +382,8 @@ scrivi_battuta(Percorso, Battuta) :-
   <rest/>
   <type>eighth</type>
 </note>'),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
   scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
@@ -381,7 +394,8 @@ scrivi_battuta(Percorso, Battuta) :-
   <rest/>
   <type>quarter</type>
 </note>'),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
   scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
@@ -392,7 +406,8 @@ scrivi_battuta(Percorso, Battuta) :-
   <rest/>
   <type>half</type>
 </note>'),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
   scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
@@ -403,7 +418,8 @@ scrivi_battuta(Percorso, Battuta) :-
   <rest/>
   <type>whole</type>
 </note>'),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
 
   scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
@@ -415,4 +431,5 @@ scrivi_battuta(Percorso, Battuta) :-
   <type>eighth</type>
   <dot/>
 </note>'),
-  scrivi_battuta(Percorso, C).
+  scrivi_battuta(Percorso, C),
+  !.
