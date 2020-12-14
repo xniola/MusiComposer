@@ -48,9 +48,9 @@ lick(1, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,[0,-2,-5,-6,-7,-9,-12],
-    [croma_terzina_iniziale,croma_terzina,
-    croma_terzina_finale,croma_terzina_iniziale,
-    croma_terzina,croma_terzina_finale,half],
+    [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    half],
     Lick),
   !.
 
@@ -67,7 +67,8 @@ lick(3, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,[7,7,12,12],
-    [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,half,pausa_quarter],
+    [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    half,pausa_quarter],
     Lick),
   !.
 
@@ -127,7 +128,7 @@ lick(10, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,[-10,-7,-3,0,-1,2,5,8,7,5,2,3,4,12],
-    [pausa_eighth,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    [pausa_quarter,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
     eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,
     pausa_quarter],
     Lick),
@@ -236,6 +237,30 @@ lick(20, Tonica, Lick) :-
     quarter],
     Lick),
   !.
+
+% distribuzione di probabilita per algoritmo genetico
+lick(1,5).
+lick(2,5).
+lick(3,5).
+lick(4,5).
+lick(5,5).
+lick(6,5).
+lick(7,5).
+lick(8,5).
+lick(9,5).
+lick(10,5).
+lick(11,5).
+lick(12,5).
+lick(13,5).
+lick(14,5).
+lick(15,5).
+lick(16,5).
+lick(17,5).
+lick(18,5).
+lick(19,5).
+lick(20,5).
+licks([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]).
+
 
 % test di prova compatibilita licks
 suonaIn(_,21).
