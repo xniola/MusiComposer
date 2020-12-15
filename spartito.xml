@@ -1,122 +1,59 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE score-partwise PUBLIC
-    "-//Recordare//DTD MusicXML 3.1 Partwise//EN"
-    "http://www.musicxml.org/dtds/partwise.dtd">
-<score-partwise version="3.1">
-  <part-list>
-    <score-part id="P1">
-      <part-name>MusiComposer</part-name>
-    </score-part>
-  </part-list>
-  <part id="P1">
-    <measure number="1">
-      <attributes>
-        <divisions>4</divisions>
-        <key>
-          <fifths>0</fifths>
-        </key>
-        <time>
-          <beats>4</beats>
-          <beat-type>4</beat-type>
-        </time>
-        <clef>
-          <sign>G</sign>
-          <line>2</line>
-        </clef>
-      </attributes> 
-<note>
-  <rest/>
-  <type>eighth</type>
-</note>
-<note>
-    <pitch>
-      <step>C</step>
-      <octave>3</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-        <notations>
-          <tuplet number="1" placement="above" type="start"/>
-        </notations>
-    </note>
-<note>
-    <pitch>
-      <step>E</step>
-      <octave>3</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-    </note>
-<note>
-    <pitch>
-      <step>G</step>
-      <octave>3</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-        <notations>
-          <tuplet number="1" type="stop"/>
-        </notations>
-    </note>
 <note>
   <pitch>
-    <step>F</step>
+    <step>A</step>
     <alter>1</alter>
     <octave>3</octave>
   </pitch>
-  <type>eighth</type>
+  <type>16th</type>
 </note>
 <note>
     <pitch>
-      <step>A</step>
+      <step>B</step>
       <octave>3</octave>
     </pitch>
-    <type>eighth</type>
-</note>
-<note>
-    <pitch>
-      <step>C</step>
-      <octave>4</octave>
-    </pitch>
-    <type>eighth</type>
-</note>
-<note>
-  <pitch>
-    <step>D</step>
-    <alter>1</alter>
-    <octave>4</octave>
-  </pitch>
-  <type>eighth</type>
+    <type>16th</type>
 </note>
 <note>
     <pitch>
       <step>D</step>
       <octave>4</octave>
     </pitch>
-    <type>eighth</type>
+    <type>16th</type>
+</note>
+<note>
+    <pitch>
+      <step>G</step>
+      <octave>4</octave>
+    </pitch>
+    <type>16th</type>
+</note>
+<note>
+    <pitch>
+      <step>F</step>
+      <octave>4</octave>
+    </pitch>
+    <type>16th</type>
+</note>
+<note>
+    <pitch>
+      <step>D</step>
+      <octave>4</octave>
+    </pitch>
+    <type>16th</type>
 </note>
 <note>
     <pitch>
       <step>C</step>
       <octave>4</octave>
     </pitch>
-    <type>eighth</type>
+    <type>16th</type>
 </note>
 <note>
     <pitch>
-      <step>A</step>
-      <octave>3</octave>
+      <step>D</step>
+      <octave>4</octave>
     </pitch>
-    <type>eighth</type>
+    <type>16th</type>
 </note>
 <note>
   <pitch>
@@ -124,26 +61,23 @@
     <alter>1</alter>
     <octave>3</octave>
   </pitch>
-  <type>eighth</type>
+  <type>16th</type>
 </note>
 <note>
     <pitch>
       <step>B</step>
       <octave>3</octave>
     </pitch>
-    <type>eighth</type>
+    <type>16th</type>
 </note>
 <note>
     <pitch>
       <step>G</step>
-      <octave>4</octave>
+      <octave>3</octave>
     </pitch>
-    <type>eighth</type>
+    <type>quarter</type>
 </note>
 <note>
   <rest/>
-  <type>quarter</type>
+  <type>eighth</type>
 </note>
-</measure>
-</part>
-</score-partwise>
