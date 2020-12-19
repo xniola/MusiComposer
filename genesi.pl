@@ -1,8 +1,3 @@
-atomico([croma_terzina_iniziale,croma_terzina,croma_terzina_finale]).
-atomico([X,Y]) :- 
-  Z is X - Y,
-  between(-1,1,Z).
-
 % restituisce una lista di 'Note' analizzando la struttura dati passata
 % prendinote(+Tonica, +StrutturaDati, -Note)
 prendinote(_,[],_).
@@ -53,6 +48,7 @@ elimina_ultimo([T, Prossimo|C], [T|NC]):-
 
 % true o false se posso tagliare una lista nel punto in cui la somma
 % dei numeri a sinistra sia pari a 'Num', se si ritorna il punto di cut in 'Res'
+% cut(+Lista, +Num, -Res)
 cut(Lista,Num,Res) :-
   somma(Lista,Somma),
   Check is Somma - Num,
@@ -66,6 +62,10 @@ cut(Lista,Num,Res1) :-
   cut(Res,Num,Res1),
   !.
 
+% trova un punto di cut ammissibile fra le due liste di ritmi.
+% un punto di cut è ammissibile se entrambe le battute possono essere
+% divise in modo che le parti separate abbiano la stessa durata ritmica
+% find_cut_point(+L1, +L2, -Res1, -Res2, -MaxCut)
 find_cut_point(L1,L2,Res1,Res2,MaxCut) :-
   % trovo indice massimo di cut
   somma(L1,Len1),
@@ -138,6 +138,8 @@ costruisci_ritmi([T|C], Res) :-
     Res = [Ritmo|NC],
     costruisci_ritmi(C, NC).
 
+% il predicato formato da 'ListaNote' e 'ListaRitmi' viene registrato nel database dei fatti.
+% costruisci_predicato(+ListaNote, +ListaRitmi)
 costruisci_predicato(ListaNote, ListaRitmi) :-
   findall(_, clause(lickfiglio(_,_,_),_), P), length(P,Len),
   Len1 is Len + 1,
@@ -153,7 +155,8 @@ costruisci_predicato(ListaNote, ListaRitmi) :-
   scrivi_su('./figli.pl',',Lick),!.'),
   ['./figli.pl'].
 
-% fase di selezione dell algoritmo genetico. seleziono due lick
+% fase di selezione dell algoritmo genetico. seleziono due lick dal database (genitori)
+% selezione(+Tonica, -Lick1, -Lick2)
 selezione(Tonica,Lick1, Lick2) :-
   findall(_, clause(lick(_,_,_),_), P), length(P,Len), 
   Len1 is Len+1,
@@ -162,9 +165,9 @@ selezione(Tonica,Lick1, Lick2) :-
   lick(Ran1,Tonica,Lick1),
   lick(Ran2,Tonica,Lick2).
 
-% algoritmo genetico
+% algoritmo genetico (selezione+crossover+mutazione)
+% genetico(+Tonica)
 genetico(Tonica) :- 
-
     selezione(Tonica,Lick1,Lick2),
     write('Lick 1 scelto: '),writeln(Lick1),
     write('Lick 2 scelto: '),writeln(Lick2),
@@ -176,7 +179,6 @@ genetico(Tonica) :-
     % ricavo i ritmi dei lick
     prendiritmo(Lick1,Ritmi1),
     prendiritmo(Lick2,Ritmi2),
-
 
     % fase di crossover dell algoritmo genetico
     find_cut_point(Ritmi1,Ritmi2,Res1,Res2,CutPoint),
@@ -223,11 +225,9 @@ genetico(Tonica) :-
     costruisci_ritmi(RitmoFiglio1,RitmoFinaleFiglio1),
     costruisci_ritmi(RitmoFiglio2,RitmoFinaleFiglio2),
 
-
     % fase di mutazione dell algoritmo genetico
     % TO DO
     % TO DO
-
 
     costruisci_predicato(NoteFiglio1,RitmoFinaleFiglio1),
     costruisci_predicato(NoteFiglio2,RitmoFinaleFiglio2).

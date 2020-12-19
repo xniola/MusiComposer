@@ -5,6 +5,8 @@ scrivi_su(Percorso, Testo) :-
     write(Testo), nl,
     told.
 
+% predicato che scrive lo spartito musicale in formato MusicXML
+% scrivi_xml(+Percorso, +Tonalita, +N)
 scrivi_xml(Percorso,Tonalita,N) :-
    scrivi_su(Percorso,'<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
@@ -35,6 +37,8 @@ scrivi_xml(Percorso,Tonalita,N) :-
 '),
 battuta_xml(Percorso,Tonalita,N).
 
+% predicato ricorsivo che compone una battuta musicale alla volta
+% battuta_xml(+Percorso, +Tonalita, +N)
 battuta_xml(Percorso,_,0) :-
   scrivi_su(Percorso,'</measure>
   </part>
@@ -48,6 +52,9 @@ battuta_xml(Percorso,Tonalita, N) :-
   scrivi_battuta(Percorso, Battuta),
   battuta_xml(Percorso,Tonalita,N1).
 
+% predicato che scrive una singola battuta musicale 
+% vengono ispezionati 2^n casi
+% scrivi_battuta(+Percorso, +Battuta)
 % nota non alterata, tempo naturale
 scrivi_battuta(_,[]).
 scrivi_battuta(Percorso, Battuta) :-
@@ -385,6 +392,9 @@ scrivi_battuta(Percorso, Battuta) :-
   scrivi_battuta(Percorso, C),
   !.
 
+
+  % pause
+  
   scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),

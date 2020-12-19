@@ -138,7 +138,6 @@ componi_battuta(ScalaDi, Pentagramma) :-
     genera(NDurate,Scala,Y), % genero N note della scala
     maplist(a_b_c, Y, Durate, Pentagramma). % mappo la durata con le note
 
-
 % lanciatore 
 componi :-
     write('Ciao! Scegli una tonalita: [c3],[d3],[e3],[f3],[g3],[a3]'),
