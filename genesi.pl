@@ -129,24 +129,56 @@ find_cut_point(L1,L2,Res1,Res2,MaxCut) :-
   % provo a tagliare nel punto
   cut(L1,MaxCut,Res1),
   cut(L2,MaxCut,Res2).
-  
 
+% costruisce i ritmi a partire dagli indici in ListaRitmi
+% costruisci_ritmi(+ListaRitmi, -Res)
+costruisci_ritmi([], _).
+costruisci_ritmi([T|C], Res) :-
+    cellula_ritmica(Ritmo,T),
+    Res = [Ritmo|NC],
+    costruisci_ritmi(C, NC).
+
+costruisci_predicato(ListaNote, ListaRitmi) :-
+  findall(_, clause(lickfiglio(_,_,_),_), P), length(P,Len),
+  Len1 is Len + 1,
+  concat('lickfiglio(',Len1,S1),
+  concat(S1,', Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,',S2),
+  scrivi_su('./figli.pl',S2),
+  scrivi_su('./figli.pl', ListaNote),
+  scrivi_su('./figli.pl', ','),
+  scrivi_su('./figli.pl',ListaRitmi),
+  scrivi_su('./figli.pl',',Lick),!.'),
+  ['./figli.pl'].
+
+% fase di selezione dell algoritmo genetico. seleziono due lick
+selezione(Tonica,Lick1, Lick2) :-
+  findall(_, clause(lick(_,_,_),_), P), length(P,Len), 
+  Len1 is Len+1,
+  random(1,Len1,Ran1),
+  random(1,Len1,Ran2),
+  lick(Ran1,Tonica,Lick1),
+  lick(Ran2,Tonica,Lick2).
+
+% algoritmo genetico
 genetico(Tonica) :- 
-    % prendo due lick a caso
-    random(1,21,Ran1),
-    random(1,21,Ran2),
-    lick(Ran1,Tonica,Lick1),
-    lick(Ran2,Tonica,Lick2),
+
+    selezione(Tonica,Lick1,Lick2),
+    write('Lick 1 scelto: '),writeln(Lick1),
+    write('Lick 2 scelto: '),writeln(Lick2),
 
     % ricavo le note dei lick 
     prendinote(Tonica,Lick1,Note1),
     prendinote(Tonica,Lick2,Note2),
 
-
     % ricavo i ritmi dei lick
     prendiritmo(Lick1,Ritmi1),
     prendiritmo(Lick2,Ritmi2),
-    
+
+
+    % fase di crossover dell algoritmo genetico
     find_cut_point(Ritmi1,Ritmi2,Res1,Res2,CutPoint),
     write('Cut point: '),CutPoint1 is round(CutPoint),writeln(CutPoint1),
     write('Ritmo genitore 1: '),writeln(Ritmi1),
@@ -188,18 +220,16 @@ genetico(Tonica) :-
     write('Note figlio 1: '),writeln(NoteFiglio1),
     write('Note figlio 2: '),writeln(NoteFiglio2),
 
-    writeln('Lunghezze Note-Ritmo Figlio 1: '),
-    length(NoteFiglio1,NF1),length(RitmoFiglio1,RF1),
-    writeln(NF1),writeln(RF1),
-    writeln('Lunghezze Note-Ritmo Figlio 2: '),
-    length(NoteFiglio2,NF2),length(RitmoFiglio2,RF2),
-    writeln(NF2),writeln(RF2),
-
-    maplist(a_b_c, NoteFiglio1, RitmoFiglio1, LickFiglio1),
-    write('Figlio 1: '),writeln(LickFiglio1),
-    maplist(a_b_c, NoteFiglio2, RitmoFiglio2, LickFiglio2),
-    write('Figlio 2: '),writeln(LickFiglio2).
+    costruisci_ritmi(RitmoFiglio1,RitmoFinaleFiglio1),
+    costruisci_ritmi(RitmoFiglio2,RitmoFinaleFiglio2),
 
 
+    % fase di mutazione dell algoritmo genetico
+    % TO DO
+    % TO DO
+
+
+    costruisci_predicato(NoteFiglio1,RitmoFinaleFiglio1),
+    costruisci_predicato(NoteFiglio2,RitmoFinaleFiglio2).
 
     

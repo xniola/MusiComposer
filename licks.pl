@@ -1,5 +1,13 @@
 ['./composer.pl'].
 
+% test di prova compatibilita licks
+suonaIn(_,21).
+suonaIn(Tonica,N) :-
+  lick(N,Tonica,_),
+  N1 is N+1,
+  suonaIn(Tonica, N1).
+
+
 % costruisce la lista degli indici relativi alla Tonica
 % costruisci_indici(+IndiceTonica, +ListaIndici; -Res)
 costruisci_indici(_,[],_).
@@ -26,7 +34,7 @@ costruisci_note2([T|C], Res) :-
     costruisci_note2(C, NC).
 
 % costruisce il lick finale a partire dalle note ricavate
-% costruisci_lick(+IndiceTonica, +ListaIndici, ListaRitmi, -Lick)
+% costruisci_lick(+IndiceTonica, +ListaIndici, +ListaRitmi, -Lick)
 costruisci_lick(_,_,[],_).
 costruisci_lick(IndiceTonica, [T|C], [T2|C2], Lick) :-
     costruisci_indici(IndiceTonica, [T|C], R1),
@@ -237,34 +245,3 @@ lick(20, Tonica, Lick) :-
     quarter],
     Lick),
   !.
-
-% distribuzione di probabilita per algoritmo genetico
-lick(1,5).
-lick(2,5).
-lick(3,5).
-lick(4,5).
-lick(5,5).
-lick(6,5).
-lick(7,5).
-lick(8,5).
-lick(9,5).
-lick(10,5).
-lick(11,5).
-lick(12,5).
-lick(13,5).
-lick(14,5).
-lick(15,5).
-lick(16,5).
-lick(17,5).
-lick(18,5).
-lick(19,5).
-lick(20,5).
-licks([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]).
-
-
-% test di prova compatibilita licks
-suonaIn(_,21).
-suonaIn(Tonica,N) :-
-  lick(N,Tonica,_),
-  N1 is N+1,
-  suonaIn(Tonica, N1).

@@ -29,10 +29,11 @@ cellula_ritmica(half, 2).
 cellula_ritmica(quarter, 1).
 cellula_ritmica(eighthdotted, 0.75).
 cellula_ritmica(eighth, 0.5).
-cellula_ritmica(croma_terzina, 0.33).
-cellula_ritmica(croma_terzina_iniziale, 0.33). % da usare in terzina
-cellula_ritmica(croma_terzina_finale, 0.33).
-cellula_ritmica('16th', 0.25).
+cellula_ritmica(croma_terzina_iniziale, 0.330). % da usare in terzina
+cellula_ritmica(croma_terzina, 0.331).
+cellula_ritmica(croma_terzina_finale, 0.332).
+cellula_ritmica("'16th'", 0.25).
+cellula_ritmica('16th',0.25). % due modi per scrivere la semicroma
 
 % pause: [ [_,_,_], pausa ]
 cellula_ritmica(pausa_16th, 0.25).
