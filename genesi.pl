@@ -230,6 +230,7 @@ genetico(Tonica) :-
     % TO DO
 
     costruisci_predicato(NoteFiglio1,RitmoFinaleFiglio1),
-    costruisci_predicato(NoteFiglio2,RitmoFinaleFiglio2).
+    costruisci_predicato(NoteFiglio2,RitmoFinaleFiglio2),
+    !.
 
     

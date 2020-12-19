@@ -46,9 +46,11 @@ battuta_xml(Percorso,_,0) :-
 
 battuta_xml(Percorso,Tonalita, N) :- 
   N1 is N-1,
-  % componi_battuta(Tonalita,Battuta),
-  % lick(1,Tonalita,Battuta),
-  lick(N,Tonalita,Battuta),
+  findall(_, clause(lickfiglio(_,_,_),_), P), length(P,Len),
+  Len1 is Len+1,
+  random(1,Len1,Random),
+  lickfiglio(Random,Tonalita,Battuta),
+  write(Battuta),
   scrivi_battuta(Percorso, Battuta),
   battuta_xml(Percorso,Tonalita,N1).
 
@@ -394,7 +396,7 @@ scrivi_battuta(Percorso, Battuta) :-
 
 
   % pause
-  
+
   scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
