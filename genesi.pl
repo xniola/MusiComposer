@@ -165,12 +165,40 @@ selezione(Tonica,Lick1, Lick2) :-
   lick(Ran1,Tonica,Lick1),
   lick(Ran2,Tonica,Lick2).
 
+% sostituisce in un certo indice della lista un elemento, e restituisce la nuova lista
+% rimpiazza(+Lista,+Indice,+Elemento,-Risultato).
+rimpiazza([_|T], 0, X, [X|T]).
+rimpiazza([H|T], I, X, [H|R]):- I > -1, NI is I-1, rimpiazza(T, NI, X, R), !.
+rimpiazza(L, _, _, L).
+
+% predicato che muta una lista di note, rimpiazzando una nota a caso 
+% con una che appartiene alla scala di blues della relativa tonica
+% mutazione(+Tonica, +NoteOriginali, -NoteMutate)
+mutazione(Tonica, NoteOriginali, NoteMutate) :-
+    % scelgo una nota nella scala blues della tonica
+    costruisci_scala_blues(Tonica, Scala),
+    random(0,14,Ran),
+    nth0(Ran,Scala,Mutazione),
+    nota(NotaMutante, Mutazione),
+
+    % trovo indice della nota scelta rispetto alla tonica
+    estensione_armonica_chitarra(Estensione),
+    indiceDi(Estensione,NotaMutante,IndiceMutanteScala),
+    indiceDi(Estensione,Tonica, IndiceTonica),
+    IndiceMutante is IndiceMutanteScala - IndiceTonica,
+
+    % muto la lista originale
+    length(NoteOriginali, Len),
+    random(0,Len,IndiceRimpiazzo),
+    rimpiazza(NoteOriginali,IndiceRimpiazzo,IndiceMutante, NoteMutate).
+
+
 % algoritmo genetico (selezione+crossover+mutazione)
 % genetico(+Tonica)
 genetico(Tonica) :- 
+
+    % selezione dei 2 genitori
     selezione(Tonica,Lick1,Lick2),
-    write('Lick 1 scelto: '),writeln(Lick1),
-    write('Lick 2 scelto: '),writeln(Lick2),
 
     % ricavo le note dei lick 
     prendinote(Tonica,Lick1,Note1),
@@ -226,11 +254,15 @@ genetico(Tonica) :-
     costruisci_ritmi(RitmoFiglio2,RitmoFinaleFiglio2),
 
     % fase di mutazione dell algoritmo genetico
-    % TO DO
-    % TO DO
+    mutazione(Tonica, NoteFiglio1, NoteMutateFiglio1),
+    writeln('Mutazione'),
+    write(NoteFiglio1),write('-->'),writeln(NoteMutateFiglio1),
 
-    costruisci_predicato(NoteFiglio1,RitmoFinaleFiglio1),
-    costruisci_predicato(NoteFiglio2,RitmoFinaleFiglio2),
+    mutazione(Tonica, NoteFiglio2, NoteMutateFiglio2),  
+    write(NoteFiglio2),write('-->'), writeln(NoteMutateFiglio2),
+
+    costruisci_predicato(NoteMutateFiglio1,RitmoFinaleFiglio1),
+    costruisci_predicato(NoteMutateFiglio2,RitmoFinaleFiglio2),
     !.
 
     

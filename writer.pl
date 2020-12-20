@@ -33,8 +33,7 @@ scrivi_xml(Percorso,Tonalita,N) :-
           <sign>G</sign>
           <line>2</line>
         </clef>
-      </attributes>  
-'),
+      </attributes>'),
 battuta_xml(Percorso,Tonalita,N).
 
 % predicato ricorsivo che compone una battuta musicale alla volta
@@ -50,7 +49,6 @@ battuta_xml(Percorso,Tonalita, N) :-
   Len1 is Len+1,
   random(1,Len1,Random),
   lickfiglio(Random,Tonalita,Battuta),
-  write(Battuta),
   scrivi_battuta(Percorso, Battuta),
   battuta_xml(Percorso,Tonalita,N1).
 
