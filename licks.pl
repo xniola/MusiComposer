@@ -6,6 +6,7 @@ suonaIn(Tonica,N) :-
   lick(N,Tonica,_),
   N1 is N+1,
   suonaIn(Tonica, N1).
+suonaIn(Tonica) :- suonaIn(Tonica, 1).
 
 
 % costruisce la lista degli indici relativi alla Tonica
@@ -245,3 +246,77 @@ lick(20, Tonica, Lick) :-
     quarter],
     Lick),
   !.
+
+turnaround(1,Tonica,Turn) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[-5,4,-5,-6,3,-6,-7,2,-7,0],
+    [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    quarter],
+    Turn),
+  !.
+
+turnaround(2,Tonica,Turn) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[-2,0,4,-3,0,3,-5,0,2,0],
+    [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    quarter],
+    Turn),
+  !.
+
+turnaround(3,Tonica,Turn) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,[-5,-2,4,-6,-3,3,-7,-4,2,0],
+    [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
+    quarter],
+    Turn),
+  !.
+
+
+assegna_punteggio(N,Punteggio) :-
+  N = 1,
+  Punteggio is 5.
+
+assegna_punteggio(N,Punteggio) :-
+  N = 2,
+  Punteggio is 3.
+
+assegna_punteggio(N,Punteggio) :-
+  N > 2,
+  Punteggio is 1.
+
+% add_tail(+List,-Element,-Risultato)
+add_tail([],X,[X]).
+add_tail([H|T],X,[H|L]):-add_tail(T,X,L).
+
+fitness_function(Risultato) :-
+  lick(1,g3,L),
+  prendiritmo(L,Ritmi),
+  conta_battute(Ritmi, NumBattute),
+  assegna_punteggio(NumBattute,Num),
+  Probabilita is Num/80,
+  Risultato = [Probabilita | C],
+  fitness_function(C,2).
+fitness_function(_,21).
+fitness_function(Risultato,N) :-
+  N1 is N+1,
+  lick(N,g3,L),
+  prendiritmo(L,Ritmi),
+  conta_battute(Ritmi, NumBattute),
+  assegna_punteggio(NumBattute,Num),
+  Probabilita is Num/80,
+  Risultato = [Probabilita | C],
+  fitness_function(C,N1).
+
+% probabilità di scegliere un lick che abbia il numero di battute indicato
+% 1 battuta --> 68.75%
+% 2 battute --> 30.00%
+% 3 battute --> 1.25%

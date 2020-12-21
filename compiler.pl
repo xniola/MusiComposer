@@ -4,4 +4,5 @@ compila :-
     ['./figli.pl'],
     ['./genesi.pl'],
     ['./licks.pl'],
-    ['./writer.pl'].
+    ['./writer.pl'],
+    ['./nipoti.pl'].

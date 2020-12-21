@@ -38,17 +38,26 @@ battuta_xml(Percorso,Tonalita,N).
 
 % predicato ricorsivo che compone una battuta musicale alla volta
 % battuta_xml(+Percorso, +Tonalita, +N)
-battuta_xml(Percorso,_,0) :-
+battuta_xml(Percorso,Tonalita,0) :-
+  findall(_, clause(turnaround(_,_,_),_), P), length(P,Len),
+  Len1 is Len+1,
+  random(1,Len1,Random),
+  turnaround(Random,Tonalita,Battuta),
+  scrivi_battuta(Percorso,Battuta),
   scrivi_su(Percorso,'</measure>
   </part>
 </score-partwise>').
 
 battuta_xml(Percorso,Tonalita, N) :- 
   N1 is N-1,
-  findall(_, clause(lickfiglio(_,_,_),_), P), length(P,Len),
+  % findall(_, clause(licknipote(_,_,_),_), P), length(P,Len),
+  % findall(_, clause(lickfiglio(_,_,_),_), P), length(P,Len),
+  findall(_, clause(lick(_,_,_),_), P), length(P,Len),
   Len1 is Len+1,
   random(1,Len1,Random),
-  lickfiglio(Random,Tonalita,Battuta),
+  % lickfiglio(Random,Tonalita,Battuta),
+  lick(Random,Tonalita,Battuta),
+  % licknipote(Random,Tonalita,Battuta),
   scrivi_battuta(Percorso, Battuta),
   battuta_xml(Percorso,Tonalita,N1).
 

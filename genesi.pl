@@ -12,7 +12,7 @@ prendinote(Tonica, [T|C], Note) :-
   prendinote(Tonica,C,NC).
 
 % restituisce una lista di 'Ritmi' analizzando la struttura dati passata
-% prendiritmo(+StrutturaDati, -Note)
+% prendiritmo(+StrutturaDati, -Ritmi)
 prendiritmo([],_).
 prendiritmo([T|C], Ritmi) :-
   nth0(1, T, Ritmo),
@@ -33,11 +33,12 @@ somma([H|T],F,Res) :-
     F2 is F+H,
     somma(T,F2,Res).
 
-% conta le battute di una lista di ritmi
+% conta quante battute da 4/4 sono comprese in una lista di ritmi
 % conta_battute(+Lista, -Num)
 conta_battute(Lista,Num) :-
   somma(Lista,0,Somma),
-  Num is Somma / 4.
+  NumFrazionario is Somma / 4,
+  Num is round(NumFrazionario).
 
 % elimina ultimo elemento della lista
 % elimina_ultimo(+Lista, -Risultato)
@@ -155,15 +156,19 @@ costruisci_predicato(ListaNote, ListaRitmi) :-
   scrivi_su('./figli.pl',',Lick),!.'),
   ['./figli.pl'].
 
+
 % fase di selezione dell algoritmo genetico. seleziono due lick dal database (genitori)
-% selezione(+Tonica, -Lick1, -Lick2)
-selezione(Tonica,Lick1, Lick2) :-
-  findall(_, clause(lick(_,_,_),_), P), length(P,Len), 
-  Len1 is Len+1,
-  random(1,Len1,Ran1),
-  random(1,Len1,Ran2),
-  lick(Ran1,Tonica,Lick1),
-  lick(Ran2,Tonica,Lick2).
+% a seconda della funzione di fitness calcolata, estrazione probabilistica
+% selezione(+ListaLick, +Probabilita, -LickScelto)
+selezione([X|_], [P|_], Cumul, Rand, X) :-
+    Rand < Cumul + P.
+selezione([_|Xs], [P|Ps], Cumul, Rand, Y) :-
+    Cumul1 is Cumul + P,
+    Rand >= Cumul1,
+    selezione(Xs, Ps, Cumul1, Rand, Y).
+selezione([X], [P], Cumul, Rand, X) :-
+    Rand < Cumul + P.
+selezione(Xs, Ps, Y) :- random(R), selezione(Xs, Ps, 0, R, Y).
 
 % sostituisce in un certo indice della lista un elemento, e restituisce la nuova lista
 % rimpiazza(+Lista,+Indice,+Elemento,-Risultato).
@@ -193,12 +198,17 @@ mutazione(Tonica, NoteOriginali, NoteMutate) :-
     rimpiazza(NoteOriginali,IndiceRimpiazzo,IndiceMutante, NoteMutate).
 
 
-% algoritmo genetico (selezione+crossover+mutazione)
+% algoritmo genetico (fitness function+selezione+crossover+mutazione)
 % genetico(+Tonica)
 genetico(Tonica) :- 
 
-    % selezione dei 2 genitori
-    selezione(Tonica,Lick1,Lick2),
+    % valutazione fitness function e selezione dei 2 genitori
+    fitness_function(Probabilita),
+    selezione([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],Probabilita,Lick1Scelto),
+    selezione([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],Probabilita,Lick2Scelto),
+
+    lick(Lick1Scelto,Tonica,Lick1),
+    lick(Lick2Scelto,Tonica,Lick2),
 
     % ricavo le note dei lick 
     prendinote(Tonica,Lick1,Note1),
@@ -265,4 +275,59 @@ genetico(Tonica) :-
     costruisci_predicato(NoteMutateFiglio2,RitmoFinaleFiglio2),
     !.
 
+
+costruisci_predicato_figli(ListaNote, ListaRitmi) :-
+  findall(_, clause(licknipote(_,_,_),_), P), length(P,Len),
+  Len1 is Len + 1,
+  concat('licknipote(',Len1,S1),
+  concat(S1,', Tonica, Lick) :-
+  estensione_armonica_chitarra(X),
+  indiceDi(X,Tonica,Indice),
+  costruisci_lick(Indice,',S2),
+  scrivi_su('./nipoti.pl',S2),
+  scrivi_su('./nipoti.pl', ListaNote),
+  scrivi_su('./nipoti.pl', ','),
+  scrivi_su('./nipoti.pl',ListaRitmi),
+  scrivi_su('./nipoti.pl',',Lick),!.'),
+  ['./nipoti.pl'].
+
+genetico_nipoti(Tonica) :- 
+
+    % valutazione fitness function e selezione dei 2 genitori
+    fitness_function_figli(Probabilita),
+    selezione([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],Probabilita,Lick1Scelto),
+    selezione([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],Probabilita,Lick2Scelto),
+
+    lickfiglio(Lick1Scelto,Tonica,Lick1),
+    lickfiglio(Lick2Scelto,Tonica,Lick2),
+
+    % ricavo le note dei lick 
+    prendinote(Tonica,Lick1,Note1),
+    prendinote(Tonica,Lick2,Note2),
+
+    % ricavo i ritmi dei lick
+    prendiritmo(Lick1,Ritmi1),
+    prendiritmo(Lick2,Ritmi2),
+
+    % fase di crossover dell algoritmo genetico
+    find_cut_point(Ritmi1,Ritmi2,Res1,Res2,_),
+    append(Res1,Rimanente1,Ritmi1),
+    append(Res2,Rimanente2,Ritmi2),
+    append(Res1,Rimanente2,RitmoFiglio1),
+    append(Res2,Rimanente1,RitmoFiglio2),
+    append(CutNote1, RemainNote1, Note1), 
+    append(CutNote2, RemainNote2, Note2), 
+    append(CutNote1,RemainNote2, NoteFiglio1),
+    append(CutNote2,RemainNote1,NoteFiglio2),
+
+    costruisci_ritmi(RitmoFiglio1,RitmoFinaleFiglio1),
+    costruisci_ritmi(RitmoFiglio2,RitmoFinaleFiglio2),
+
+    % fase di mutazione dell algoritmo genetico
+    mutazione(Tonica, NoteFiglio1, NoteMutateFiglio1),
+    mutazione(Tonica, NoteFiglio2, NoteMutateFiglio2),  
+
+    costruisci_predicato_figli(NoteMutateFiglio1,RitmoFinaleFiglio1),
+    costruisci_predicato_figli(NoteMutateFiglio2,RitmoFinaleFiglio2),
+    !.
     
