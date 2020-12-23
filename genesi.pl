@@ -176,26 +176,50 @@ rimpiazza([_|T], 0, X, [X|T]).
 rimpiazza([H|T], I, X, [H|R]):- I > -1, NI is I-1, rimpiazza(T, NI, X, R), !.
 rimpiazza(L, _, _, L).
 
+min_in_list([Min],Min).                 % Weve found the minimum
+
+min_in_list([H,K|T],M) :-
+    H =< K,                             % H is less than or equal to K
+    min_in_list([H|T],M).                % so use H
+
+min_in_list([H,K|T],M) :-
+    H > K,                               % H is greater than K
+    min_in_list([K|T],M).   
+
+
+max_in_list([Max],Max).                 % Weve found the minimum
+
+max_in_list([H,K|T],M) :-
+    H =< K,                             % H is less than or equal to K
+    max_in_list([K|T],M).                % so use H
+
+max_in_list([H,K|T],M) :-
+    H > K,                               % H is greater than K
+    max_in_list([H|T],M). 
+
 % predicato che muta una lista di note, rimpiazzando una nota a caso 
 % con una che appartiene alla scala di blues della relativa tonica
 % mutazione(+Tonica, +NoteOriginali, -NoteMutate)
 mutazione(Tonica, NoteOriginali, NoteMutate) :-
-    % scelgo una nota nella scala blues della tonica
-    costruisci_scala_blues(Tonica, Scala),
-    random(0,14,Ran),
-    nth0(Ran,Scala,Mutazione),
-    nota(NotaMutante, Mutazione),
 
-    % trovo indice della nota scelta rispetto alla tonica
-    estensione_armonica_chitarra(Estensione),
-    indiceDi(Estensione,NotaMutante,IndiceMutanteScala),
-    indiceDi(Estensione,Tonica, IndiceTonica),
-    IndiceMutante is IndiceMutanteScala - IndiceTonica,
-
-    % muto la lista originale
     length(NoteOriginali, Len),
     random(0,Len,IndiceRimpiazzo),
-    rimpiazza(NoteOriginali,IndiceRimpiazzo,IndiceMutante, NoteMutate).
+    IndiceNotaAdiacente1 is IndiceRimpiazzo - 1,
+    IndiceNotaAdiacente2 is IndiceRimpiazzo + 1,
+    nth0(IndiceNotaAdiacente1,NoteOriginali,NotaAdiacente1),
+    nth0(IndiceNotaAdiacente2,NoteOriginali,NotaAdiacente2),
+    write('NotaAdiacente1 -->'),writeln(NotaAdiacente1),
+    write('NotaAdiacente2 -->'),writeln(NotaAdiacente2),
+
+    min_in_list([NotaAdiacente1,NotaAdiacente2],NotaMinima),
+    max_in_list([NotaAdiacente1,NotaAdiacente2],NotaMassima),
+    % NotaMassima is max(NotaAdicente1,NotaAdiacente2,NotaMassima),
+    write('TTTTTT'),write(NotaMinima), writeln(NotaMassima),
+    NotaMassimaScelta is NotaMinima + 8,
+    NotaMinimaScelta is NotaMassima - 7,
+    random(NotaMinimaScelta,NotaMassimaScelta,Mutazione),
+    write('Nota mutante--->'),writeln(Mutazione),
+    rimpiazza(NoteOriginali,IndiceRimpiazzo,Mutazione, NoteMutate).
 
 
 % algoritmo genetico (fitness function+selezione+crossover+mutazione)
