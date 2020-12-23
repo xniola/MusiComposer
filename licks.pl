@@ -12,6 +12,7 @@ suonaIn(Tonica) :- suonaIn(Tonica, 1).
 % costruisce la lista degli indici relativi alla Tonica
 % costruisci_indici(+IndiceTonica, +ListaIndici; -Res)
 costruisci_indici(_,[],_).
+costruisci_indici(_,[T|_],_) :- var(T).
 costruisci_indici(IndiceTonica, [T|C], Res) :-
     NewIndice is IndiceTonica + T,
     Res = [NewIndice|NC],

@@ -176,26 +176,32 @@ rimpiazza([_|T], 0, X, [X|T]).
 rimpiazza([H|T], I, X, [H|R]):- I > -1, NI is I-1, rimpiazza(T, NI, X, R), !.
 rimpiazza(L, _, _, L).
 
-min_in_list([Min],Min).                 % Weve found the minimum
-
+% trova il minimo in una lista
+% min_in_list(+Lista,-Minimo)
+min_in_list([Min],Min).                 
 min_in_list([H,K|T],M) :-
-    H =< K,                             % H is less than or equal to K
-    min_in_list([H|T],M).                % so use H
-
+    H =< K,                             
+    min_in_list([H|T],M).               
 min_in_list([H,K|T],M) :-
-    H > K,                               % H is greater than K
+    H > K,                               
     min_in_list([K|T],M).   
 
-
-max_in_list([Max],Max).                 % Weve found the minimum
-
+% trova il massimo in una lista
+% max_in_list(+Lista, -Massimo)
+max_in_list([Max],Max).                 
 max_in_list([H,K|T],M) :-
-    H =< K,                             % H is less than or equal to K
-    max_in_list([K|T],M).                % so use H
-
+    H =< K,                             
+    max_in_list([K|T],M).                
 max_in_list([H,K|T],M) :-
-    H > K,                               % H is greater than K
+    H > K,                              
     max_in_list([H|T],M). 
+
+% specializzazione del predicato random, non da errore nel caso
+% in cui il lower bound è uguale o maggiore dell upper bound.
+scegli(X,X,X).
+scegli(Low,High,Scelta) :- Low > High, random(High,Low,Scelta).
+scegli(Low,High,Scelta) :- random(Low,High,Scelta).
+
 
 % predicato che muta una lista di note, rimpiazzando una nota a caso 
 % con una che appartiene alla scala di blues della relativa tonica
@@ -214,10 +220,9 @@ mutazione(Tonica, NoteOriginali, NoteMutate) :-
     min_in_list([NotaAdiacente1,NotaAdiacente2],NotaMinima),
     max_in_list([NotaAdiacente1,NotaAdiacente2],NotaMassima),
     % NotaMassima is max(NotaAdicente1,NotaAdiacente2,NotaMassima),
-    write('TTTTTT'),write(NotaMinima), writeln(NotaMassima),
     NotaMassimaScelta is NotaMinima + 8,
     NotaMinimaScelta is NotaMassima - 7,
-    random(NotaMinimaScelta,NotaMassimaScelta,Mutazione),
+    scegli(NotaMinimaScelta,NotaMassimaScelta,Mutazione),
     write('Nota mutante--->'),writeln(Mutazione),
     rimpiazza(NoteOriginali,IndiceRimpiazzo,Mutazione, NoteMutate).
 
