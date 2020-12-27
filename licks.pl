@@ -8,7 +8,6 @@ suonaIn(Tonica,N) :-
   suonaIn(Tonica, N1).
 suonaIn(Tonica) :- suonaIn(Tonica, 1).
 
-
 % costruisce la lista degli indici relativi alla Tonica
 % costruisci_indici(+IndiceTonica, +ListaIndici; -Res)
 costruisci_indici(_,[],_).
@@ -94,26 +93,26 @@ lick(4, Tonica, Lick) :-
 lick(5, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
-  costruisci_lick(Indice,[-12,-10,-9,-8,-5,-3,-5,0],
-    [quarter,eighth,eighth,eighth,eighth,eighth,eighth,whole],
+  costruisci_lick(Indice,[-12,-10,-9,-8,-5,-3,-5],
+    [quarter,eighth,eighth,eighth,eighth,eighth,eighth],
     Lick),
   !.
 
 lick(6, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
-  costruisci_lick(Indice,[12,10,9,7,9,3,2,0,-3,-5,0],
+  costruisci_lick(Indice,[12,10,9,7,9,3,2,0,-3,-5],
     [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
     eighth,eighth,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
-    eighth,eighth,whole],
+    eighth,eighth],
     Lick),
   !.
 
 lick(7, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
-  costruisci_lick(Indice,[7,6,5,0,3,4,0],
-    [quarter,quarter,eighth,eighth,eighth,eighth,whole],
+  costruisci_lick(Indice,[7,6,5,0,3,4],
+    [quarter,quarter,eighth,eighth,eighth,eighth],
     Lick),
   !.
 
@@ -178,12 +177,11 @@ lick(13, Tonica, Lick) :-
 lick(14, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
-  costruisci_lick(Indice,[3,0,-2,0,-2,-5,-2,-5,-7,-5,-7,-9,-12],
+  costruisci_lick(Indice,[3,0,-2,0,-2,-5,-2,-5,-7,-5,-7,-9],
     [croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
     croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
     croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
-    croma_terzina_iniziale,croma_terzina,croma_terzina_finale,
-    whole],
+    croma_terzina_iniziale,croma_terzina,croma_terzina_finale],
     Lick),
   !.
 

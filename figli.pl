@@ -1,139 +1,96 @@
-somma_punteggi(Risultato) :-
-  lickfiglio(1,g3,L),
-  prendiritmo(L,Ritmi),
-  conta_battute(Ritmi,NumBattute),
-  assegna_punteggio(NumBattute,Num),
-  Risultato = [Num|C],
-  somma_punteggi(C,2).
-
-somma_punteggi(_,18). 
-somma_punteggi(Risultato,N) :-
-  findall(_, clause(lickfiglio(_,_,_),_), P), length(P,Len),
-  N =< Len,
-  N1 is N+1,
-  lickfiglio(N,g3,L),
-  prendiritmo(L,Ritmi),
-  conta_battute(Ritmi, NumBattute),
-  assegna_punteggio(NumBattute,Num),
-  Risultato = [Num | C],
-  somma_punteggi(C,N1).
-
-fitness_function_figli(Risultato) :-
-  lickfiglio(1,g3,L),
-  prendiritmo(L,Ritmi),
-  conta_battute(Ritmi, NumBattute),
-  assegna_punteggio(NumBattute,Num),
-  somma_punteggi(Somma),
-  somma(Somma,Somma1),
-  Probabilita is Num/Somma1,
-  Risultato = [Probabilita | C],
-  fitness_function_figli(C,2).
-fitness_function_figli(_,19).
-fitness_function_figli(Risultato,N) :-
-  N1 is N+1,
-  lickfiglio(N,g3,L),
-  prendiritmo(L,Ritmi),
-  conta_battute(Ritmi, NumBattute),
-  assegna_punteggio(NumBattute,Num),
-  somma_punteggi(Somma),
-  somma(Somma,Somma1),
-  Probabilita is Num/Somma1,
-  Risultato = [Probabilita | C],
-  fitness_function_figli(C,N1).
-
 lickfiglio(1, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[-12,-10,-10,-8,-5,0,_48456]
+[-12,-14,-9,-12]
 ,
-[quarter,eighth,eighth,eighth,eighth,quarter|_48410]
+[quarter,eighth,eighth,half|_57874]
 ,Lick),!.
 lickfiglio(2, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[7,7,12,12,-3,-6,0]
+[0,-2,-3,-6,-7,-9,-8,-5,-3,-5]
 ,
-[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,half,eighth,eighth,whole|_48452]
+[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,eighth,eighth,eighth,eighth|_57934]
 ,Lick),!.
 lickfiglio(3, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[-12,-9,-7,-5,-2,0,3,5,3,10,12,15,-3,-5,0]
+[6,7,12,10,7,6,3,3,0,0,4]
 ,
-['16th','16th','16th','16th','16th','16th','16th','16th','16th','16th','16th','16th',eighth,eighth,whole|_33832]
+[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,eighth,eighth|_37994]
 ,Lick),!.
 lickfiglio(4, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[12,10,9,7,9,3,0,0,7]
+[7,0,7,3,4,7,0]
 ,
-[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,eighth,eighth,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,quarter|_33886]
+[eighth,eighth,eighth,eighth,eighth,eighth,quarter|_38036]
 ,Lick),!.
 lickfiglio(5, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[0,-2,-5,-6,-7,-9,-2,-3,-7,-5,-7,-9,-12]
+[12,10,7,6,5,3,-12]
 ,
-[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,whole|_16780]
+[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,half|_14692]
 ,Lick),!.
 lickfiglio(6, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[3,0,-2,-1,-2,-5,-12,_16942]
+[0,-2,-5,-6,-7,-5,0]
 ,
-[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,half|_16822]
+[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,half|_14734]
 ,Lick),!.
 lickfiglio(7, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[0,2,9,-12]
+[3,0,-2,0,-2,-5,-2,-5,-6,-3,-5]
 ,
-[eighth,eighth,quarter,half|_58798]
+[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,eighth,eighth|_59512]
 ,Lick),!.
 lickfiglio(8, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[0,-2,-5,-6,-7,0,7,6,5,3,2,0]
+[-12,-10,-7,-8,-5,-5,-7,-9]
 ,
-[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale|_58870]
+[quarter,eighth,eighth,eighth,eighth,croma_terzina_iniziale,croma_terzina,croma_terzina_finale|_59560]
 ,Lick),!.
 lickfiglio(9, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[0,2,9,7,6,5,0]
+[-12,-10,-9,-8,-5,-1,3,2,0,-5,-9,-10,-5,0]
 ,
-[eighth,eighth,quarter,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,quarter|_37718]
+[quarter,eighth,eighth,eighth,eighth,eighth,eighth,quarter,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,eighth,eighth,quarter|_43874]
 ,Lick),!.
 lickfiglio(10, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[12,10,7,5,2,5,3,3,2,0]
+[-10,-9,-7,-5,-4,-2,-4,-5]
 ,
-[quarter,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale|_37778]
+[eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth|_43922]
 ,Lick),!.
 lickfiglio(11, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[0,12,6,5,2,-12]
+[3,0,-5,3,0,-5,3,-1,-5,-3,-5]
 ,
-[eighth,eighth,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,half|_24634]
+[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,eighth,eighth|_25416]
 ,Lick),!.
 lickfiglio(12, Tonica, Lick) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,Indice),
   costruisci_lick(Indice,
-[0,-2,-5,-6,-7,-9,11,2,5,8,7,5,3,3,4,-5,0]
+[-12,-10,-6,-8,-5,3,0,-5]
 ,
-[croma_terzina_iniziale,croma_terzina,croma_terzina_finale,croma_terzina_iniziale,croma_terzina,croma_terzina_finale,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,eighth,quarter|_24736]
+[quarter,eighth,eighth,eighth,eighth,croma_terzina_iniziale,croma_terzina,croma_terzina_finale|_25464]
 ,Lick),!.

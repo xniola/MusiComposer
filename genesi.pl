@@ -47,6 +47,49 @@ elimina_ultimo([T, Prossimo|C], [T|NC]):-
   elimina_ultimo([Prossimo|C], NC),
   !.
 
+somma_punteggi(Risultato) :-
+  lickfiglio(1,g3,L),
+  prendiritmo(L,Ritmi),
+  conta_battute(Ritmi,NumBattute),
+  assegna_punteggio(NumBattute,Num),
+  Risultato = [Num|C],
+  somma_punteggi(C,2).
+
+somma_punteggi(_,18). 
+somma_punteggi(Risultato,N) :-
+  findall(_, clause(lickfiglio(_,_,_),_), P), length(P,Len),
+  N =< Len,
+  N1 is N+1,
+  lickfiglio(N,g3,L),
+  prendiritmo(L,Ritmi),
+  conta_battute(Ritmi, NumBattute),
+  assegna_punteggio(NumBattute,Num),
+  Risultato = [Num | C],
+  somma_punteggi(C,N1).
+
+fitness_function_figli(Risultato) :-
+  lickfiglio(1,g3,L),
+  prendiritmo(L,Ritmi),
+  conta_battute(Ritmi, NumBattute),
+  assegna_punteggio(NumBattute,Num),
+  somma_punteggi(Somma),
+  somma(Somma,Somma1),
+  Probabilita is Num/Somma1,
+  Risultato = [Probabilita | C],
+  fitness_function_figli(C,2).
+fitness_function_figli(_,19).
+fitness_function_figli(Risultato,N) :-
+  N1 is N+1,
+  lickfiglio(N,g3,L),
+  prendiritmo(L,Ritmi),
+  conta_battute(Ritmi, NumBattute),
+  assegna_punteggio(NumBattute,Num),
+  somma_punteggi(Somma),
+  somma(Somma,Somma1),
+  Probabilita is Num/Somma1,
+  Risultato = [Probabilita | C],
+  fitness_function_figli(C,N1).
+
 % true o false se posso tagliare una lista nel punto in cui la somma
 % dei numeri a sinistra sia pari a 'Num', se si ritorna il punto di cut in 'Res'
 % cut(+Lista, +Num, -Res)
@@ -209,7 +252,8 @@ scegli(Low,High,Scelta) :- random(Low,High,Scelta).
 mutazione(Tonica, NoteOriginali, NoteMutate) :-
 
     length(NoteOriginali, Len),
-    random(0,Len,IndiceRimpiazzo),
+    Len1 is Len-1,
+    random(1,Len1,IndiceRimpiazzo),
     IndiceNotaAdiacente1 is IndiceRimpiazzo - 1,
     IndiceNotaAdiacente2 is IndiceRimpiazzo + 1,
     nth0(IndiceNotaAdiacente1,NoteOriginali,NotaAdiacente1),
@@ -220,8 +264,8 @@ mutazione(Tonica, NoteOriginali, NoteMutate) :-
     min_in_list([NotaAdiacente1,NotaAdiacente2],NotaMinima),
     max_in_list([NotaAdiacente1,NotaAdiacente2],NotaMassima),
     % NotaMassima is max(NotaAdicente1,NotaAdiacente2,NotaMassima),
-    NotaMassimaScelta is NotaMinima + 8,
-    NotaMinimaScelta is NotaMassima - 7,
+    NotaMassimaScelta is NotaMinima + 5,
+    NotaMinimaScelta is NotaMassima - 5,
     scegli(NotaMinimaScelta,NotaMassimaScelta,Mutazione),
     write('Nota mutante--->'),writeln(Mutazione),
     rimpiazza(NoteOriginali,IndiceRimpiazzo,Mutazione, NoteMutate).

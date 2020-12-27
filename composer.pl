@@ -138,13 +138,40 @@ componi_battuta(ScalaDi, Pentagramma) :-
     genera(NDurate,Scala,Y), % genero N note della scala
     maplist(a_b_c, Y, Durate, Pentagramma). % mappo la durata con le note
 
+leggi_tonalita(Tonalita,Risultato) :-
+  Tonalita = 'Do',
+  Risultato = c4.
+leggi_tonalita(Tonalita,Risultato) :-
+  Tonalita = 'Re',
+  Risultato = d4.
+leggi_tonalita(Tonalita,Risultato) :-
+  Tonalita = 'Mi',
+  Risultato = e4.
+leggi_tonalita(Tonalita,Risultato) :-
+  Tonalita = 'Fa',
+  Risultato = f4.
+leggi_tonalita(Tonalita,Risultato) :-
+  Tonalita = 'Sol',
+  Risultato = g4.
+leggi_tonalita(Tonalita,Risultato) :-
+  Tonalita = 'La',
+  Risultato = a4.
+leggi_tonalita(Tonalita,Risultato) :-
+  Tonalita = 'Si',
+  Risultato = b3.
+leggi_tonalita(_,Risultato) :-
+  Risultato = e4.
+
+
 % lanciatore 
 componi :-
-    write('Ciao! Scegli una tonalita: [c3],[d3],[e3],[f3],[g3],[a3]'),
+    write('Ciao! Scegli una tonalita (Do,Re,Mi,Fa,Sol,La,Si): '),
     read(Tonalita),
-    write('Ora scegli quante battute suonare: [1],[2],...,[10]'),
+    leggi_tonalita(Tonalita, Risultato),
+    write('Ora scegli quante battute suonare (1,2,...,4): '),
     read(N),
-    scrivi_xml('spartito.xml',Tonalita, N).
+    scrivi_xml('spartito.xml',Risultato, N),
+    write('Il tuo assolo è stato composto su spartito.xml !!').
 
 componi(Tonalita, N) :-
   scrivi_xml('spartito.xml',Tonalita,N).
