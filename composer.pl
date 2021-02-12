@@ -58,7 +58,7 @@ indiceDi([_|C], Element, Indice):-
   Indice is Indice1+1.
 
 % costruisce la lista degli indici relativi alla Tonica
-% costruisci_indici_scalablues(+IndiceTonica, +ListaIndici; -Res)
+% costruisci_indici_scalablues(+IndiceTonica, +ListaIndici, -Res)
 costruisci_indici_scalablues(_,[],_).
 costruisci_indici_scalablues(IndiceTonica, ListaIndici, Res) :-
     IndiceTonica < 18,
@@ -94,49 +94,11 @@ costruisci_scala_blues(Tonica, Scala) :-
   estensione_armonica_chitarra(X),
   indiceDi(X,Tonica,IndiceTonica),
   costruisci_indici_scalablues(IndiceTonica, [3,5,6,7,10,12,15,17,18,19,22,24,27], Res),
+  write('Indici: '),write(Res),
   costruisci_note_scalablues(Res, Res1),
-  costruisci_note2_scalablues(Res1,Scala).
-  
-% varie battute ritmiche in 4/4.
-battuta(1,[eighth,eighth,eighthdotted,'16th',half]).
-battuta(2,['16th','16th',eighth,quarter,eighthdotted,quarter]).
-battuta(3,[eighth, eighth, croma_terzina_iniziale,croma_terzina,croma_terzina_finale, quarter, eighth,eighth]).
-battuta(4,[eighth, eighth, eighth, eighth, quarter, quarter]).
-battuta(5,[quarter,pausa_quarter,quarter,pausa_quarter]).
-
-
-% viene utilizzato nel predicato ricorsivo "genera" per estrarre una nota da una scala musicale "Lista".
-% sceglie un elemento random "Elem" da una "Lista" 
-% scegli_random(+Lista, -Elem)
-scegli_random([], []).
-scegli_random(Lista, Elem) :-
-        length(Lista, Len),
-        random(0, Len, Index),
-        nth0(Index, Lista, Elem).
-    
-% genera ricorsivamente una sequenza di note musicali
-% crea una lista "Y" di lunghezza "C" che contiene solo elementi di "Lista" 
-% genera(+C, +Lista, -Y)
-genera(0,_,[]).  
-genera(C,Lista, Y) :-
-  C > 0,        
-  C1 is C-1,    
-  scegli_random(Lista,Elem),
-  Y = [Elem|T],   
-  genera(C1,Lista, T).
-
-% serve a maplist per mappare la lista delle note con la lista dei tempi
-a_b_c(A,B,[A,B]).
-
-% compone una battuta intera (sia note che tempo) e la restituisce su "Pentagramma"
-% componi_battuta(+ScalaDi, -Pentagramma)
-componi_battuta(ScalaDi, Pentagramma) :-
-    random(1,6,Res), % scelgo una battuta ritmica a caso
-    battuta(Res, Durate), % costruisco la lista delle durate 
-    length(Durate,NDurate),
-    costruisci_scala_blues(ScalaDi, Scala), % costruisco la scala indicata
-    genera(NDurate,Scala,Y), % genero N note della scala
-    maplist(a_b_c, Y, Durate, Pentagramma). % mappo la durata con le note
+  write('Note: '),write(Res1),
+  costruisci_note2_scalablues(Res1,Scala),
+  write('Fine: '),write(Scala).
 
 leggi_tonalita(Tonalita,Risultato) :-
   Tonalita = 'Do',
@@ -161,7 +123,6 @@ leggi_tonalita(Tonalita,Risultato) :-
   Risultato = b3.
 leggi_tonalita(_,Risultato) :-
   Risultato = e4.
-
 
 % lanciatore 
 componi :-

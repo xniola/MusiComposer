@@ -26,7 +26,48 @@
       </attributes>
 <note>
     <pitch>
+      <step>D</step>
+      <octave>5</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" placement="above" type="start"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
       <step>C</step>
+      <alter>1</alter>
+      <octave>5</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+    </note>
+<note>
+    <pitch>
+      <step>A</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" type="stop"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>G</step>
+      <alter>1</alter>
       <octave>4</octave>
     </pitch>
      <type>eighth</type>
@@ -40,9 +81,8 @@
     </note>
 <note>
     <pitch>
-      <step>A</step>
-      <alter>1</alter>
-      <octave>3</octave>
+      <step>G</step>
+      <octave>4</octave>
     </pitch>
      <type>eighth</type>
         <time-modification>
@@ -52,8 +92,8 @@
     </note>
 <note>
     <pitch>
-      <step>A</step>
-      <octave>3</octave>
+      <step>F</step>
+      <octave>4</octave>
     </pitch>
      <type>eighth</type>
         <time-modification>
@@ -67,8 +107,7 @@
 <note>
     <pitch>
       <step>F</step>
-      <alter>1</alter>
-      <octave>3</octave>
+      <octave>4</octave>
     </pitch>
      <type>eighth</type>
         <time-modification>
@@ -78,22 +117,21 @@
         <notations>
           <tuplet number="1" placement="above" type="start"/>
         </notations>
-    </note>
-<note>
-    <pitch>
-      <step>F</step>
-      <octave>3</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
     </note>
 <note>
     <pitch>
       <step>D</step>
-      <alter>1</alter>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+    </note>
+<note>
+    <pitch>
+      <step>A</step>
       <octave>3</octave>
     </pitch>
      <type>eighth</type>
@@ -107,35 +145,7 @@
     </note>
 <note>
     <pitch>
-      <step>E</step>
-      <octave>3</octave>
-    </pitch>
-    <type>eighth</type>
-</note>
-<note>
-    <pitch>
-      <step>G</step>
-      <octave>3</octave>
-    </pitch>
-    <type>eighth</type>
-</note>
-<note>
-    <pitch>
-      <step>A</step>
-      <octave>3</octave>
-    </pitch>
-    <type>eighth</type>
-</note>
-<note>
-    <pitch>
-      <step>G</step>
-      <octave>3</octave>
-    </pitch>
-    <type>eighth</type>
-</note>
-<note>
-    <pitch>
-      <step>C</step>
+      <step>F</step>
       <octave>4</octave>
     </pitch>
      <type>eighth</type>
@@ -149,9 +159,8 @@
     </note>
 <note>
     <pitch>
-      <step>A</step>
-      <alter>1</alter>
-      <octave>3</octave>
+      <step>D</step>
+      <octave>4</octave>
     </pitch>
      <type>eighth</type>
         <time-modification>
@@ -161,7 +170,7 @@
     </note>
 <note>
     <pitch>
-      <step>G</step>
+      <step>A</step>
       <octave>3</octave>
     </pitch>
      <type>eighth</type>
@@ -175,9 +184,8 @@
     </note>
 <note>
     <pitch>
-      <step>F</step>
-      <alter>1</alter>
-      <octave>3</octave>
+      <step>D</step>
+      <octave>5</octave>
     </pitch>
      <type>eighth</type>
         <time-modification>
@@ -190,8 +198,9 @@
     </note>
 <note>
     <pitch>
-      <step>F</step>
-      <octave>3</octave>
+      <step>C</step>
+      <alter>1</alter>
+      <octave>5</octave>
     </pitch>
      <type>eighth</type>
         <time-modification>
@@ -201,7 +210,86 @@
     </note>
 <note>
     <pitch>
+      <step>A</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" type="stop"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
       <step>G</step>
+      <alter>1</alter>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" placement="above" type="start"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>G</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+    </note>
+<note>
+    <pitch>
+      <step>F</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" type="stop"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>F</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" placement="above" type="start"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>D</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+    </note>
+<note>
+    <pitch>
+      <step>A</step>
       <octave>3</octave>
     </pitch>
      <type>eighth</type>
@@ -215,7 +303,67 @@
     </note>
 <note>
     <pitch>
-      <step>C</step>
+      <step>F</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" placement="above" type="start"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>D</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+    </note>
+<note>
+    <pitch>
+      <step>A</step>
+      <octave>3</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" type="stop"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>D</step>
+      <octave>4</octave>
+    </pitch>
+    <type>eighth</type>
+</note>
+<note>
+    <pitch>
+      <step>D</step>
+      <octave>4</octave>
+    </pitch>
+    <type>eighth</type>
+</note>
+<note>
+    <pitch>
+      <step>B</step>
+      <octave>3</octave>
+    </pitch>
+    <type>quarter</type>
+</note>
+<note>
+    <pitch>
+      <step>D</step>
       <octave>4</octave>
     </pitch>
     <type>half</type>
@@ -223,7 +371,125 @@
 <note>
     <pitch>
       <step>D</step>
+      <octave>5</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" placement="above" type="start"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>C</step>
+      <octave>5</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+    </note>
+<note>
+    <pitch>
+      <step>A</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" type="stop"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>G</step>
       <alter>1</alter>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" placement="above" type="start"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>G</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+    </note>
+<note>
+    <pitch>
+      <step>F</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" type="stop"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>A</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" placement="above" type="start"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>G</step>
+      <alter>1</alter>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+    </note>
+<note>
+    <pitch>
+      <step>G</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <notations>
+          <tuplet number="1" type="stop"/>
+        </notations>
+    </note>
+<note>
+    <pitch>
+      <step>F</step>
       <octave>4</octave>
     </pitch>
      <type>eighth</type>
@@ -248,22 +514,7 @@
     </note>
 <note>
     <pitch>
-      <step>G</step>
-      <octave>3</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-        <notations>
-          <tuplet number="1" type="stop"/>
-        </notations>
-    </note>
-<note>
-    <pitch>
       <step>D</step>
-      <alter>1</alter>
       <octave>4</octave>
     </pitch>
      <type>eighth</type>
@@ -272,7 +523,7 @@
           <normal-notes>2</normal-notes>
         </time-modification>
         <notations>
-          <tuplet number="1" placement="above" type="start"/>
+          <tuplet number="1" type="stop"/>
         </notations>
     </note>
 <note>
@@ -285,24 +536,24 @@
           <actual-notes>3</actual-notes>
           <normal-notes>2</normal-notes>
         </time-modification>
+        <notations>
+          <tuplet number="1" placement="above" type="start"/>
+        </notations>
     </note>
 <note>
     <pitch>
-      <step>G</step>
-      <octave>3</octave>
+      <step>D</step>
+      <octave>4</octave>
     </pitch>
      <type>eighth</type>
         <time-modification>
           <actual-notes>3</actual-notes>
           <normal-notes>2</normal-notes>
         </time-modification>
-        <notations>
-          <tuplet number="1" type="stop"/>
-        </notations>
     </note>
 <note>
     <pitch>
-      <step>D</step>
+      <step>F</step>
       <alter>1</alter>
       <octave>4</octave>
     </pitch>
@@ -312,7 +563,7 @@
           <normal-notes>2</normal-notes>
         </time-modification>
         <notations>
-          <tuplet number="1" placement="above" type="start"/>
+          <tuplet number="1" type="stop"/>
         </notations>
     </note>
 <note>
@@ -325,11 +576,25 @@
           <actual-notes>3</actual-notes>
           <normal-notes>2</normal-notes>
         </time-modification>
+        <notations>
+          <tuplet number="1" placement="above" type="start"/>
+        </notations>
     </note>
 <note>
     <pitch>
-      <step>G</step>
-      <octave>3</octave>
+      <step>D</step>
+      <octave>4</octave>
+    </pitch>
+     <type>eighth</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+    </note>
+<note>
+    <pitch>
+      <step>F</step>
+      <octave>4</octave>
     </pitch>
      <type>eighth</type>
         <time-modification>
@@ -345,21 +610,6 @@
       <step>A</step>
       <octave>3</octave>
     </pitch>
-    <type>eighth</type>
-</note>
-<note>
-    <pitch>
-      <step>G</step>
-      <octave>3</octave>
-    </pitch>
-    <type>eighth</type>
-</note>
-<note>
-    <pitch>
-      <step>A</step>
-      <alter>1</alter>
-      <octave>3</octave>
-    </pitch>
      <type>eighth</type>
         <time-modification>
           <actual-notes>3</actual-notes>
@@ -371,7 +621,7 @@
     </note>
 <note>
     <pitch>
-      <step>C</step>
+      <step>D</step>
       <octave>4</octave>
     </pitch>
      <type>eighth</type>
@@ -396,86 +646,7 @@
     </note>
 <note>
     <pitch>
-      <step>A</step>
-      <octave>3</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-        <notations>
-          <tuplet number="1" placement="above" type="start"/>
-        </notations>
-    </note>
-<note>
-    <pitch>
-      <step>C</step>
-      <octave>4</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-    </note>
-<note>
-    <pitch>
       <step>D</step>
-      <alter>1</alter>
-      <octave>4</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-        <notations>
-          <tuplet number="1" type="stop"/>
-        </notations>
-    </note>
-<note>
-    <pitch>
-      <step>G</step>
-      <octave>3</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-        <notations>
-          <tuplet number="1" placement="above" type="start"/>
-        </notations>
-    </note>
-<note>
-    <pitch>
-      <step>C</step>
-      <octave>4</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-    </note>
-<note>
-    <pitch>
-      <step>D</step>
-      <octave>4</octave>
-    </pitch>
-     <type>eighth</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>
-        <notations>
-          <tuplet number="1" type="stop"/>
-        </notations>
-    </note>
-<note>
-    <pitch>
-      <step>C</step>
       <octave>4</octave>
     </pitch>
     <type>quarter</type>

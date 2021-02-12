@@ -292,10 +292,6 @@ assegna_punteggio(N,Punteggio) :-
   N > 2,
   Punteggio is 1.
 
-% add_tail(+List,-Element,-Risultato)
-add_tail([],X,[X]).
-add_tail([H|T],X,[H|L]):-add_tail(T,X,L).
-
 fitness_function(Risultato) :-
   lick(1,g3,L),
   prendiritmo(L,Ritmi),

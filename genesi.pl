@@ -245,15 +245,19 @@ scegli(X,X,X).
 scegli(Low,High,Scelta) :- Low > High, random(High,Low,Scelta).
 scegli(Low,High,Scelta) :- random(Low,High,Scelta).
 
+% viene utilizzato nel predicato "mutazione" per individuare una nota da una scala musicale "Lista".
+% sceglie un elemento random "Elem" da una "Lista" 
+% scegli_random(+Lista, -Elem)
+scegli_random(NoteOriginali, IndiceRimpiazzo) :-
+    length(NoteOriginali, Len),
+    Len1 is Len-1,
+    random(1,Len1,IndiceRimpiazzo).
 
 % predicato che muta una lista di note, rimpiazzando una nota a caso 
 % con una che appartiene alla scala di blues della relativa tonica
-% mutazione(+Tonica, +NoteOriginali, -NoteMutate)
-mutazione(Tonica, NoteOriginali, NoteMutate) :-
-
-    length(NoteOriginali, Len),
-    Len1 is Len-1,
-    random(1,Len1,IndiceRimpiazzo),
+% mutazione(+NoteOriginali, -NoteMutate)
+mutazione(NoteOriginali, NoteMutate) :-
+    scegli_random(NoteOriginali,IndiceRimpiazzo),
     IndiceNotaAdiacente1 is IndiceRimpiazzo - 1,
     IndiceNotaAdiacente2 is IndiceRimpiazzo + 1,
     nth0(IndiceNotaAdiacente1,NoteOriginali,NotaAdiacente1),
@@ -337,13 +341,14 @@ genetico(Tonica) :-
     costruisci_ritmi(RitmoFiglio2,RitmoFinaleFiglio2),
 
     % fase di mutazione dell algoritmo genetico
-    mutazione(Tonica, NoteFiglio1, NoteMutateFiglio1),
+    mutazione(NoteFiglio1, NoteMutateFiglio1),
     writeln('Mutazione'),
     write(NoteFiglio1),write('-->'),writeln(NoteMutateFiglio1),
 
-    mutazione(Tonica, NoteFiglio2, NoteMutateFiglio2),  
+    mutazione(NoteFiglio2, NoteMutateFiglio2),  
     write(NoteFiglio2),write('-->'), writeln(NoteMutateFiglio2),
 
+    % scrivo su file i figli ottenuti
     costruisci_predicato(NoteMutateFiglio1,RitmoFinaleFiglio1),
     costruisci_predicato(NoteMutateFiglio2,RitmoFinaleFiglio2),
     !.
@@ -365,7 +370,6 @@ costruisci_predicato_figli(ListaNote, ListaRitmi) :-
   ['./nipoti.pl'].
 
 genetico_nipoti(Tonica) :- 
-
     % valutazione fitness function e selezione dei 2 genitori
     fitness_function_figli(Probabilita),
     selezione([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],Probabilita,Lick1Scelto),
@@ -397,8 +401,8 @@ genetico_nipoti(Tonica) :-
     costruisci_ritmi(RitmoFiglio2,RitmoFinaleFiglio2),
 
     % fase di mutazione dell algoritmo genetico
-    mutazione(Tonica, NoteFiglio1, NoteMutateFiglio1),
-    mutazione(Tonica, NoteFiglio2, NoteMutateFiglio2),  
+    mutazione(NoteFiglio1, NoteMutateFiglio1),
+    mutazione(NoteFiglio2, NoteMutateFiglio2),  
 
     costruisci_predicato_figli(NoteMutateFiglio1,RitmoFinaleFiglio1),
     costruisci_predicato_figli(NoteMutateFiglio2,RitmoFinaleFiglio2),

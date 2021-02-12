@@ -62,7 +62,6 @@ battuta_xml(Percorso,Tonalita, N) :-
   battuta_xml(Percorso,Tonalita,N1).
 
 % predicato che scrive una singola battuta musicale 
-% vengono ispezionati 2^n casi
 % scrivi_battuta(+Percorso, +Battuta)
 % nota non alterata, tempo naturale
 scrivi_battuta(_,[]).
@@ -122,7 +121,7 @@ scrivi_battuta(Percorso, Battuta) :-
   scrivi_battuta(Percorso, C),
   !.
 
-% nota non alterata, tempo terzina della croma iniziale
+% nota non alterata, tempo croma iniziale della terzina
 scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
@@ -183,7 +182,7 @@ scrivi_battuta(Percorso, Battuta) :-
   scrivi_battuta(Percorso, C),
   !.
 
-% nota non alterata, tempo croma terzina finale.
+% nota non alterata, tempo croma finale della terzina.
 scrivi_battuta(Percorso,Battuta) :-
   Battuta = [_|C],
   nth0(0, Battuta, Elemento),
@@ -400,9 +399,6 @@ scrivi_battuta(Percorso, Battuta) :-
 </note>'),
   scrivi_battuta(Percorso, C),
   !.
-
-
-  % pause
 
   scrivi_battuta(Percorso, Battuta) :-
   Battuta = [_|C],
