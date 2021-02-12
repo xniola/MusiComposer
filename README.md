@@ -6,4 +6,4 @@ Strumento consigliato: Chitarra elettrica/acustica
 
 Stile musicale: blues/jazz. 
 
-Nella cartella "spartiti" è possibile qualche esempio.
+Nella cartella "spartiti" è possibile trovare qualche esempio.
