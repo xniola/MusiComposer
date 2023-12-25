@@ -1,9 +1,7 @@
-# MusiComposer
-Progetto svolto per il corso di Intelligenza Artificiale. Si tratta di un generatore di assoli musicali realizzato mediante algoritmi genetici.
-E' stata anche implementata un utility per la conversione delle melodie in formato MusicXML per la visualizzazione dello spartito e l'ascolto.
+Project done for the Artificial Intelligence course. It is a generator of musical solos realized by genetic algorithms. A utility for converting melodies into MusicXML format for score display and listening was also implemented.
 
-Strumento consigliato: Chitarra elettrica/acustica
+Recommended instrument: electric/acoustic guitar
 
-Stile musicale: blues/jazz. 
+Musical style: blues/jazz.
 
-Si legga MusiComposer.pdf per maggiori informazioni
+Please read MusiComposer.pdf for more information
